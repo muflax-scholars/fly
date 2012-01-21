@@ -3,7 +3,7 @@
 
 """Fly: Training program for Plover (Open Source Stenography Software)"""
 
-__version__ = '0.0.2rc'
+__version__ = '0.0.2'
 __copyright__ = '(C) 2011 Pragma Nolint'
 __license__ = 'GNU General Public License, version 2'
 
