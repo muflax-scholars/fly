@@ -1,4 +1,4 @@
-Copyright (c) 2011 Pragma Nolint.
+Copyright (c) 2012 Pragma Nolint.
 See LICENSE.txt for details.
 Note: Some code based on pygame "Type Game" by Pawel Krawczak (diavel) 
 released under license "You're free do to whatever you want with this 
