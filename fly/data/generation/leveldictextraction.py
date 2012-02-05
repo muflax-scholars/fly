@@ -56,37 +56,23 @@ class LevelDictionaryCreator(object):
         """Generates and writes out 6 dicts to hard-coded relative filepaths"""
 
         sixDict = self.get_level_six_dict(self.dictionary)    
-        self.dump(sixDict, self.dictionary_filename_6)
+        dump(sixDict, self.dictionary_filename_6)
 
         fiveDict = self.get_level_five_dict(sixDict)
-        self.dump(fiveDict, self.dictionary_filename_5)
+        dump(fiveDict, self.dictionary_filename_5)
 
         fourDict = self.get_level_four_dict(fiveDict)
-        self.dump(fourDict, self.dictionary_filename_4)
+        dump(fourDict, self.dictionary_filename_4)
 
         threeDict = self.get_level_three_dict(fourDict)
-        self.dump(threeDict, self.dictionary_filename_3)
+        dump(threeDict, self.dictionary_filename_3)
 
         twoDict = self.get_level_two_dict(threeDict)
-        self.dump(twoDict, self.dictionary_filename_2)
+        dump(twoDict, self.dictionary_filename_2)
 
         oneDict = self.get_level_one_dict(twoDict)
-        self.dump(oneDict, self.dictionary_filename_1)
+        dump(oneDict, self.dictionary_filename_1)
 
-    def dump(self, dictionary, filepath):
-
-        """Write dictionary to filepath.
-
-        @param dictionary: plover keystroke to translation dict
-        @param filepath: path of file to write dict to
-
-        @type dictionary: dict
-        @type filepath: str
-        """
-        
-        with open(filepath, 'w') as f:
-            logger.info("Writing %s" % filepath)
-            json.dump(dictionary, f)
 
     @staticmethod
     def get_level_six_dict(dictionary):
@@ -102,11 +88,6 @@ class LevelDictionaryCreator(object):
             if value.find("{") != -1:
                 continue
             
-            # Chords containing numbers are currently not supported. When they 
-            # are, perhaps move this to Level 4 to introduce numbers earlier.
-            if re.search('\d', key) != None:
-                continue
-        
             level_dict[key] = value
         return level_dict
     
@@ -200,6 +181,51 @@ class LevelDictionaryCreator(object):
         return level_dict        
 
 
+def dump(dictionary, filepath):
+
+    """Write dictionary to filepath.
+
+    @param dictionary: plover keystroke to translation dict
+    @param filepath: path of file to write dict to
+
+    @type dictionary: dict
+    @type filepath: str
+    """
+    
+    with open(filepath, 'w') as f:
+        logger.info("Writing %s" % filepath)
+        json.dump(dictionary, f)
+
+
+def writeFilteredDict(dictionary, dict_filepath):
+
+    """Customize plover's default dictionary for use with Fly.
+
+    @param dictionary: plover keystroke to translation dict
+    @param filepath: path of file to write dict to
+
+    @type dictionary: dict
+    @type filepath: str
+    """
+
+    new_dictionary = {}
+
+    for key, value in dictionary.iteritems():
+        # Chords containing numbers are currently not supported. When they 
+        # are, perhaps move this to Level 4 to introduce numbers earlier.
+        if re.search('\d', key) != None:
+            continue
+
+        new_dictionary[key] = value
+        
+    # Removing "he is" from dictionary since the two strokes are defined
+    # separately ("he": "E", "is": "S"). They're an artifact from some 
+    # proprietary software's "Translation Magic" algorithm.
+    if "E/S" in new_dictionary:
+        new_dictionary.pop("E/S")
+    dump(new_dictionary, dict_filepath) 
+
+
 if __name__ == "__main__":
 
     # Filter main plover dict to write 6 dictionaries of varying difficulty
@@ -207,6 +233,9 @@ if __name__ == "__main__":
 
     dict_filepath = fileutils.get_plover_dict_path()
     dictionary = dictionaryreader.load_dict(dict_filepath)
+
+    writeFilteredDict(dictionary, dict_filepath)
+
     level_dict_creator = LevelDictionaryCreator(dictionary)
     level_dict_creator.dump_dicts()
 
