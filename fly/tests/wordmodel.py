@@ -81,7 +81,17 @@ class WordModelTest(unittest.TestCase):
         expected_letters = ['W', 'E', 'R', 'C', 'V', 'N', 'M', 'P']
         self.assertTrue(qwerty_letters == expected_letters, 
                         "actually %s" % qwerty_letters)
+  
+    def test_all_chords_valid(self):
 
+        """Any user-entered chord corresponding to correct is valid."""
+
+        self.model.word = 'SKR'
+        self.model.translation = 'have'
+
+        self.model.input_word = 'SR'
+        self.model.input_translation = 'have'
+        self.assertTrue(self.model.right_word_entered() == True)
 
 
 if __name__ == '__main__':
