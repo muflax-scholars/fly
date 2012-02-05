@@ -136,7 +136,8 @@ class GameModel(interface.InteractionModelInterface):
         @rtype: bool
         """
 
-        if self.word == self.input_word:
+        if self.translation.lower() == self.input_translation.lower() or \
+           self.word.lower() == self.input_word.lower():
             return True
         return False
     
