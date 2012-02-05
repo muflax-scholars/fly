@@ -46,7 +46,7 @@ def get_all_words_in_lessons(dictionary):
     lesson_list = lesson_finder.find_lessons()
     
     # Populate lesson objects
-    lesson_filler = LessonFiller(dictionary)
+    lesson_filler = LessonFiller()
     chord_helper = LessonToChords(dictionary)
 
     for lesson in lesson_list:
