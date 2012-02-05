@@ -8,8 +8,6 @@ are plain text files with directive in first line. See file
 HOW_TO_ADD_LESSONS in data/lessons for more info.
 """
 
-import re
-
 from fly.lessons.helpers.finder import LessonFinder
 from fly.lessons.helpers.tochords import LessonToChords
 from fly.lessons.helpers.directive import DirectiveInterpreter
@@ -32,7 +30,7 @@ class LessonControl(object):
         self.current_lesson = None
         self.dir_helper = LessonFinder(fileutils.get_lessons_directory())
         self.chord_helper = LessonToChords(dictionary)
-        self.populate_helper = LessonFiller(dictionary)
+        self.populate_helper = LessonFiller()
         self.word_chooser_helper = LessonWordChooserMapper()
         
         self.lesson_list = self.dir_helper.find_lessons()

@@ -67,9 +67,8 @@ class LessonFillerTest(unittest.TestCase):
 
         lessonFiller = LessonFiller()
         chords_list = []
-        translation, sentence_map, new_chords_list = \
-                lessonFiller.generate_translation_for_sentences(sentences, 
-                                                                chords_list)
+        translation, sentence_map = \
+                lessonFiller.generate_translation_for_sentences(sentences)
 
         expected_translation = ['for', 'transient', 'sorrows', ',', 'simple', 
                                 'wiles', ',', 'praise', ',', 'blame', ',', 
@@ -150,92 +149,21 @@ class LessonFillerTest(unittest.TestCase):
                                            'THRE': 'Three', 'TWO': 'Two', 
                                            'WUB': 'One', 'SEUBGS': 'Six'}
 
-        self.assertTrue(lesson_obj.sentences_list == expected_sentences_list,
-                        "actually %s" % lesson_obj.sentences_list)
+        self.assertEquals(lesson_obj.sentences_list, expected_sentences_list)
 
-        self.assertTrue(lesson_obj.chord_sentences_list == \
-                        expected_chord_sentences_list,
-                        "actually %s" % lesson_obj.chord_sentences_list)
+        self.assertEquals(lesson_obj.chord_sentences_list, 
+                          expected_chord_sentences_list)
 
-        self.assertTrue(lesson_obj.chords_list == expected_chords_list,
-                        "actually %s" % lesson_obj.chords_list)
+        self.assertEquals(lesson_obj.chords_list, expected_chords_list)
 
-        self.assertTrue(lesson_obj.translation_list == \
-                        expected_translation_list,
-                        "actually %s" % lesson_obj.translation_list)
+        self.assertEquals(lesson_obj.translation_list, 
+                          expected_translation_list)
 
-        self.assertTrue(lesson_obj.sentence_map == expected_sentence_map,
-                        "actually %s" % lesson_obj.sentence_map)
+        self.assertEquals(lesson_obj.sentence_map, expected_sentence_map)
 
-        self.assertTrue(lesson_obj.chord_translation_dict == \
-                        expected_chord_translation_dict,
-                        "actually %s" % lesson_obj.chord_translation_dict)
+        self.assertEquals(lesson_obj.chord_translation_dict,
+                          expected_chord_translation_dict)
 
-    def test_generate_translation_compress(self):
-        
-        """Check generating translation for sentences is compressing.
-        
-        This tests for a chord which compressed is the same chords in two
-        strokes.
-        """
-        
-        lessonFiller = LessonFiller({"E/S":"he is"})
-        chords_list = ['HA', 'S', '-RB', 'E', 'S', 'HAOEUBG', 'HA', 
-                       '-P', 'AULZ', '-T', 'SAEUPL', '-P'] 
-        translation_sentence_list = ['that is, he is like that.', 
-                                     'Always the same.']
-
-        new_translation_list, sentence_map, new_chords_list, = \
-            lessonFiller.generate_translation_for_sentences(translation_sentence_list,
-                                                            chords_list)
-
-        expected_chords_list = ['HA', 'S', '-RB', 'E/S', 'HAOEUBG', 
-                                'HA', '-P', 'AULZ', '-T', 'SAEUPL', '-P']
-        expected_translation_list = ['that', 'is', ',', 'he is', 'like', 
-                                     'that', '.', 'always', 'the', 'same', '.']
-        expected_sentence_map = {0: [0, 1, 2, 3, 4, 5, 6], 1: [7, 8, 9, 10]}
-
-        self.assertTrue(expected_chords_list == new_chords_list,
-                        "actually %s" % new_chords_list)
-
-        self.assertTrue(expected_translation_list == new_translation_list,
-                        "actually %s" % new_translation_list)
-
-        self.assertTrue(expected_sentence_map == sentence_map,
-                        "actually %s" % sentence_map)
-
-    def test_compress_unique_chord(self):
-        
-        """Check compression when chord is unique.
-        
-        This tests for a chord which compressed is a different chord
-        than the two chords used to generate same translation.
-        """
-        
-        lessonFiller = LessonFiller({"SKPEU": "and I"})
-        chords_list = ['KW-GS', 'U', 'WABT', 'O', 'TEL', 'PHE', '-RB', 'SKP',
-                       'EU', 'SR', 'TPHO', 'OBGS'] 
-        translation_sentence_list = ['"You want to tell me, '
-                                     'and I have no objection']
-
-        new_translation_list, sentence_map, new_chords_list, = \
-            lessonFiller.generate_translation_for_sentences(translation_sentence_list,
-                                                            chords_list)
-
-        expected_chords_list = ['KW-GS', 'U', 'WABT', 'O', 'TEL', 'PHE', 
-                                '-RB', 'SKPEU', 'SR', 'TPHO', 'OBGS']
-        expected_translation_list = ['"', 'you', 'want', 'to', 'tell', 'me', 
-                                     ',', 'and i', 'have', 'no', 'objection']
-        expected_sentence_map = {0: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-
-        self.assertTrue(expected_chords_list == new_chords_list,
-                        "actually %s" % new_chords_list)
-
-        self.assertTrue(expected_translation_list == new_translation_list,
-                        "actually %s" % new_translation_list)
-
-        self.assertTrue(expected_sentence_map == sentence_map,
-                        "actually %s" % sentence_map)
 
 if __name__ == '__main__':
     unittest.main()
