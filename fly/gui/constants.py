@@ -112,11 +112,11 @@ of the lesson name until you see the name of the lesson you want to do. Start \
 the lesson by typing the keys as prompted."""
 
 INITIAL_TEXT = """Fly v%s: a training program for Plover, the open source \
-stenography program.
-Created by Pragma.Nolint@gmail.com
+stenography program. Hosted at https://launchpad.net/flyploverfly.
 Plover by Mirabai Knight (stenographer) and Joshua Harlan Lifton \
 (programmer), more info at http://stenoknight.com/plover/
 NOTE: Plover should NOT be active when running this program.
+Press left shift key to toggle hint options.
 """ % __version__
 
 

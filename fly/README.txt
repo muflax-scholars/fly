@@ -49,9 +49,22 @@ See file HOW_TO_ADD_LESSONS in data/lessons for how to do this.
 
 DEVELOPING FLY
 
+Fly is hosted at https://launchpad.net/flyploverfly.
+
 Fly has tests in directory "tests". All tests can be run by typing in
 a terminal: "./run_all_tests.csh" providing you are in the main directory, 
 and that the run_all_tests file has the appropriate permissions (chmod 
 +x run_all_tests.csh to make executable).
 
+
+SUPPORT
+
+Please email the google discussion group ploversteno@googlegroups.com 
+for support, or report a bug on launchpad. 
+
+
+AUTHORS
+
+Pragma Nolint
+Michael Roberts
 

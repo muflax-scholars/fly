@@ -2,9 +2,9 @@
 
 	* First release.
 
-xx-xx-2012  v0.0.2
+xx-xx-2012  v1.0.0
 
-    * Updated to plover-2.2.0
+    * Now works with Windows
     * Suspends translation when losing window focus, so that users can
       type using qwerty in other windows while running Fly
     * Support for other steno machines, by using the same discovery method
@@ -17,5 +17,7 @@ xx-xx-2012  v0.0.2
       be set in config.py.
     * Word:category dictionary now used so that misstrokes and briefs do not
       appear in lessons.
+    * Any chord can be used that produces the correct translation, not just 
+      the one presented to the user.
 
 
