@@ -220,12 +220,14 @@ class WordToChordTranslator(object):
         second_try_handler = WordLowerCase(self.inverse_dict)
         third_try_handler = WordPunctuationWithCaret(self.inverse_dict)
         fourth_try_handler = WordEndsApostropheEss(self.inverse_dict)
+        fifth_try_handler = WordIsMrOrMrs(self.inverse_dict)
         default_handler = WordUndefined(self.inverse_dict)
         
         first_try_handler.successor = second_try_handler
         second_try_handler.successor = third_try_handler
         third_try_handler.successor = fourth_try_handler
-        fourth_try_handler.successor = default_handler
+        fourth_try_handler.successor = fifth_try_handler
+        fifth_try_handler.successor = default_handler
 
         chord_holder = first_try_handler.handle(word)
         random_chord = chord_holder.get_random_chord()
@@ -322,9 +324,25 @@ class WordEndsApostropheEss(WordCaseHandler):
         if word.endswith("'s"):
             bare_word = word.rstrip("'s")
             if bare_word in self.inverse_dict:
-                chord = self.get_random_chord(bare_word)
+                chord = self.inverse_dict[bare_word].get_random_chord()
                 if chord:
                     return ChordHolder('%s/A*ES' % chord)
+        # Nope, not applicable. Move on to next handler.
+        return self.successor.handle(word)
+
+
+class WordIsMrOrMrs(WordCaseHandler):
+
+    """Mr or Mrs are special cases in dict as they add a
+    space and capitalize the next word. Hence they're hard
+    to find. 
+    """
+
+    def handle(self, word):
+        if word.find("Mr") != -1:
+            if word.find("Mrs") != -1:
+                return self.inverse_dict["{Mrs.}{ }{-|}"]
+            return self.inverse_dict["Mr.{ }{-|}"]
         # Nope, not applicable. Move on to next handler.
         return self.successor.handle(word)
 
