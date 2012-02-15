@@ -12,6 +12,9 @@ from fly.data import stenoqwerty
 from fly.data import alphabetdict as alphabet
 from fly.translation import ploverfacade
 
+import logging
+logger = logging.getLogger(__name__)
+
 
 class KeyHighlighterInterface(object):
     
@@ -117,7 +120,8 @@ class KeyHighlighter(KeyHighlighterInterface):
             results = self.__pick_side(real_letters_left, 
                                        real_letters_right, 
                                        word_starter,
-                                       previous_letter_order)
+                                       previous_letter_order,
+                                       steno_word)
             if not results:
                 continue
             real_letter = results[0]
@@ -127,7 +131,7 @@ class KeyHighlighter(KeyHighlighterInterface):
         return real_letters
 
     def __pick_side(self, letters_left, letters_right, 
-                    word_starter, previous_letter_order):
+                    word_starter, previous_letter_order, steno_word):
 
         """Decide whether left or right letters should be used.
         
@@ -139,11 +143,14 @@ class KeyHighlighter(KeyHighlighterInterface):
         @param previous_letter_order: the order of the steno key/s on the 
                                       keyboard for the previous steno key/s
                                       in the chord.
+        @param steno_word: single chord word to type in steno letters, 
+                           e.g. AU
 
         @type letters_left: str
         @type letters_right: str
         @type word_starter: str
         @type previous_letter_order: int
+        @type steno_word: str
 
         @return: tuple of (letters_left or letters_right, how far right on the
                  keyboard the letters go, according to steno ordering)
@@ -153,7 +160,7 @@ class KeyHighlighter(KeyHighlighterInterface):
         if word_starter:
             right_ordering = self.__get_ordering(letters_right, 
                                                  previous_letter_order)
-            return letters_right, max(right_ordering)
+            return letters_right, self.__get_max(right_ordering, steno_word)
 
         left_ordering = self.__get_ordering(letters_left, 
                                             previous_letter_order)
@@ -161,15 +168,28 @@ class KeyHighlighter(KeyHighlighterInterface):
                                              previous_letter_order)
 
         if len(left_ordering) != 0 and len(right_ordering) != 0:
-            return letters_left, max(left_ordering)
+            return letters_left, self.__get_max(left_ordering, steno_word)
 
         if len(left_ordering) == 0 and len(right_ordering) != 0:
-            return letters_right, max(right_ordering)
+            return letters_right, self.__get_max(right_ordering, steno_word)
 
         if len(left_ordering) != 0:
-            return letters_left, max(left_ordering)
+            return letters_left, self.__get_max(left_ordering, steno_word)
         return None
             
+    def __get_max(self, letter_order_list, steno_word):
+        
+        """Get max of list or raise exception on empty list."""
+
+        if letter_order_list is []:
+            excStr = "Bug detected! Steno chord %s caused this error. "\
+                     "Please report this bug following instructions "\
+                     "in the README file which can be found in Fly's main "\
+                     "dir. Include this error "\
+                     "message." % steno_word
+            raise Exception(excStr)
+        return max(letter_order_list)
+
     def __get_ordering(self, letters, previous_letter_order):
 
         """Return list of ints representing the order of the letters.
@@ -196,6 +216,7 @@ class KeyHighlighter(KeyHighlighterInterface):
             letter_order = ploverfacade.get_ordering(word_starter + letter)
             if letter_order >= previous_letter_order:
                 letter_order_list.append(letter_order)
+        
         return letter_order_list
 
     def __get_real_letters_left(self, letter):
