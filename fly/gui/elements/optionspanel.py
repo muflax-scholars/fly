@@ -46,8 +46,8 @@ class OptionsPanelGUI(interface.GUIElementInterface):
         self.menu_bar = gel.DisplayPanel((x_pos, 0), 
                                         (c.MENU_BAR_WIDTH, c.SCREEN_HEIGHT), 
                                         "GAME OPTIONS", 
-                                        (15,15,15), 
-                                        (200, 200, 200))
+                                        c.MENU_BAR_COLOR, 
+                                        c.MENU_BAR_TEXT_COLOR)
 
         # Create text label for display options at bottom
         self.display_option_caption = gel.Caption((c.OPTION_DISPLAY_CAPTION_X, 
@@ -55,8 +55,8 @@ class OptionsPanelGUI(interface.GUIElementInterface):
                                                    16, 
                                                    c.CAPTION_SIZE,
                                                    "DISPLAY OPTIONS", 
-                                                   text_color=(200, 200, 200), 
-                                                   background_color=(15,15,15))
+                                                   text_color=c.MENU_BAR_TEXT_COLOR, 
+                                                   background_color=c.MENU_BAR_COLOR)
 
     def get_mode(self):
 

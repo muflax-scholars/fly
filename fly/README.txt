@@ -41,6 +41,13 @@ Use the mouse to click on options on the right-hand panel, and
 press keys to enter chords as prompted.
 
 
+ACCESSIBILITY
+
+Fly can be run with different colour schemes, see config.py option
+COLOR_SCHEME. For people with low vision, the colour scheme
+"highcontrast" will provide a high contrast view.
+
+
 EXTENDING FLY
 
 Custom lessons can be added to fly by adding files to data/lessons. 

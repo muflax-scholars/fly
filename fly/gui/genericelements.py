@@ -32,7 +32,8 @@ class Caption(DrawableElementInterface):
     """Box with text. The text will change during the life of the element."""
     
     def __init__(self, pos, font_size, size, text, margin=0, 
-                 text_color=(100,100,100), background_color=(0,0,0)):
+                 text_color=constants.CAPTION_TEXT_COLOR, 
+                 background_color=constants.CAPTION_BACKGROUND_COLOR):
         
         """
         @param pos: position on screen (x, y)
@@ -182,14 +183,14 @@ class KeyboardKey(DrawableElementInterface):
             pressed_blue = max(self.color[2] - 50, 0)
             self.pressed_color = (pressed_red, pressed_green, pressed_blue)
         
-            lit_red = min(self.color[0] + 25, 255)
-            lit_green = min(self.color[1] + 25, 255)
-            lit_blue = min(self.color[2] + 25, 255)
+            lit_red = min(self.color[0] + constants.KEY_LIT_INCREMENT[0], 255)
+            lit_green = min(self.color[1] + constants.KEY_LIT_INCREMENT[1], 255)
+            lit_blue = min(self.color[2] + constants.KEY_LIT_INCREMENT[2], 255)
             self.lit_color = (lit_red, lit_green, lit_blue)
 
-            partial_red = min(self.color[0] + 10, 255)
-            partial_green = min(self.color[1] + 10, 255)
-            partial_blue = min(self.color[2] + 10, 255)
+            partial_red = min(self.color[0] + constants.PARTIAL_LIT_INCREMENT[0], 255)
+            partial_green = min(self.color[1] + constants.PARTIAL_LIT_INCREMENT[1], 255)
+            partial_blue = min(self.color[2] + constants.PARTIAL_LIT_INCREMENT[2], 255)
             self.partial_lit_color = (partial_red, partial_green, partial_blue)
 
     def blit_on(self, surface):
@@ -217,6 +218,8 @@ class KeyboardKey(DrawableElementInterface):
             if self.highlight_keys and self.steno_tint_color and \
                (self.lit or self.partial_lit):
                 self.steno_color = (0, 0, 0)
+            elif self.highlight_keys and (self.lit or self.partial_lit):
+                self.steno_color = constants.HIGHLIGHTED_KEY_TEXT_COLOR
 
             # Render the steno label on the screen
             steno_text = font.render(self.steno_caption, 1, self.steno_color)
@@ -428,14 +431,14 @@ class Button(DrawableElementInterface):
         
         self.margin = 10
 
-        pressed_red = min(self.color[0]+100, 255)
-        pressed_green = min(self.color[1]+100, 255)
-        pressed_blue = min(self.color[2]+100, 255)
+        pressed_red = min(self.color[0]+constants.BUTTON_PRESSED_INCREMENT[0], 255)
+        pressed_green = min(self.color[1]+constants.BUTTON_PRESSED_INCREMENT[1], 255)
+        pressed_blue = min(self.color[2]+constants.BUTTON_PRESSED_INCREMENT[2], 255)
         self.pressed_color = (pressed_red, pressed_green, pressed_blue)
 
-        hover_red = min(self.color[0]+50, 255)
-        hover_green = min(self.color[1]+50, 255)
-        hover_blue = min(self.color[2]+50, 255)
+        hover_red = min(self.color[0]+constants.BUTTON_HOVER_INCREMENT[0], 255)
+        hover_green = min(self.color[1]+constants.BUTTON_HOVER_INCREMENT[1], 255)
+        hover_blue = min(self.color[2]+constants.BUTTON_HOVER_INCREMENT[2], 255)
         self.hover_color = (hover_red, hover_green, hover_blue)
         self.active_color = self.hover_color 
 

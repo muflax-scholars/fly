@@ -17,9 +17,7 @@ class StartupCaption(object):
         pos = (constants.SCREEN_WIDTH/2. - size[0]/2., 
                constants.SCREEN_HEIGHT/2. - size[1]/2.)
         text = "Loading"
-        text_color = (100, 100, 100)
-        self.caption = genericelements.Caption(pos, font_size, size, 
-                                               text, text_color=text_color)
+        self.caption = genericelements.Caption(pos, font_size, size, text)
 
     def display(self, screen, text):
 

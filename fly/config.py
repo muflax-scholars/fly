@@ -3,6 +3,10 @@
 
 """Configurable game options."""
 
+"""Color options"""
+# Available colour schemes: "classic", "light", "highcontrast"
+COLOR_SCHEME = "classic"
+
 """Initial display settings"""
 # Display word and translation side by side
 # This can be toggled in the GUI with "Toggle Word/Sentence"

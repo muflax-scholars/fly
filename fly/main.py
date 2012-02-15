@@ -94,6 +94,7 @@ class Main(StoppableThread):
                                                constants.SCREEN_HEIGHT))
         pygame.display.set_caption("Fly, Plover, Fly! "
                                    "v%s" % __version__)
+        self.screen.fill(constants.CANVAS_COLOR)
 
         # Display "Loading [X%]" caption on screen before GUI displays, as game
         # can take a while to load.
@@ -201,7 +202,7 @@ class Main(StoppableThread):
         self.gui.update_speed_bar(words_per_minute, accuracy)
        
         # Update display
-        self.screen.fill((0,0,0))
+        self.screen.fill(constants.CANVAS_COLOR)
         self.gui.draw(self.screen)
         pygame.display.flip()
 
