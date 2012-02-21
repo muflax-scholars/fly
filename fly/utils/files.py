@@ -26,6 +26,10 @@ def get_level_dict_path(level):
     return os.path.join(get_dictionaries_directory(),
                         'dict_level_%s.json' % level)
 
+def get_categorization_dict_path():
+    """Return the file path to the categorization dict."""
+    return os.path.join(get_dictionaries_directory(),
+                        'word_category.json')
 
 def get_lessons_directory():
     """Get the directory with the lesson files."""

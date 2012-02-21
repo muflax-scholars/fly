@@ -33,6 +33,14 @@ class FileUtilsTest(unittest.TestCase):
         path = fileutils.get_dictionaries_directory()
         self.assertTrue(os.path.exists(path))
         self.assertTrue(os.path.isdir(path))
+    
+    def test_get_categorization_dict_path(self):
+
+        """Check the categorization dict exists and is a file."""
+
+        path = fileutils.get_categorization_dict_path()
+        self.assertTrue(os.path.exists(path))
+        self.assertTrue(os.path.isfile(path))
 
     def test_get_plover_dict_path(self):
 

@@ -1,4 +1,5 @@
 python -m tests.alphabetmodel
+python -m tests.chordcategorization
 python -m tests.dictreaderutils
 python -m tests.fileutils
 python -m tests.inputinterpreter

@@ -120,19 +120,19 @@ def find_option(option):
 
     nominated_option = None
     if option.find("c") != -1:
-        nominated_option = "canon"
+        nominated_option = wordstochords.CANON
 
     if option.find("a") != -1:
-        nominated_option = "alternative"
+        nominated_option = wordstochords.ALTERNATIVE
 
     if option.find("b") != -1:
-        nominated_option = "brief"
+        nominated_option = wordstochords.BRIEF
         
     if option.find("m") != -1:
-        nominated_option = "misstroke"
+        nominated_option = wordstochords.MISSTROKE
 
     if option.find("u") != -1:
-        nominated_option = "unknown"
+        nominated_option = wordstochords.UNKNOWN
 
     return nominated_option
 
@@ -200,8 +200,11 @@ def main():
 
 
     # Query user for each chord for multiple chorded words in filtered word list
-    option_str = "Please choose one of: c) canon a) alternative b) brief " \
-                 "m) misstroke u) unknown (q to quit)"
+    option_str = "Please choose one of: c) %s a) %s b) %s " \
+                 "m) %s u) %s (q to quit)" % (wordstochords.CANON, 
+                                              wordstochords.BRIEF, 
+                                              wordstochords.MISSTROKE, 
+                                              wordstochords.UNKNOWN)
 
     new_category_dict = {} 
     for word, chord_holder in word_chord_holder_dict.iteritems():
