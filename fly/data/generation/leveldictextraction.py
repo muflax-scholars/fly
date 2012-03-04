@@ -225,6 +225,8 @@ def writeFilteredDict(dictionary, dict_filepath):
         new_dictionary.pop("E/S")
     dump(new_dictionary, dict_filepath) 
 
+    dictionary = new_dictionary
+
 
 if __name__ == "__main__":
 

@@ -16,8 +16,11 @@ xx-xx-2012  v1.0.0
     * Left shift key will toggle hint options on or off. Hint options can 
       be set in config.py.
     * Word:category dictionary now used so that misstrokes and briefs do not
-      appear in lessons.
+      appear in lessons. In word mode, only canon strokes or uncategorized 
+      strokes will be presented.
     * Any chord can be used that produces the correct translation, not just 
       the one presented to the user.
+    * "Briefs" lesson added, that contains only briefs from word
+      categorization dictionary.
 
 

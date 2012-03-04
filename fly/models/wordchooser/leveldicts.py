@@ -8,6 +8,7 @@ import random
 from fly.models.wordchooser import interface
 from fly.utils import dictionaryreader as dictread
 from fly.utils import files as fileutils
+from fly.translation import wordstochords
 
 
 class RetrieveFromLevelDictionaries(interface.WordChooserInterface):
@@ -26,6 +27,7 @@ class RetrieveFromLevelDictionaries(interface.WordChooserInterface):
     dictionary_filename_4 = fileutils.get_level_dict_path(4)
     dictionary_filename_5 = fileutils.get_level_dict_path(5)
     dictionary_filename_6 = fileutils.get_level_dict_path(6)
+    word_category_filepath = fileutils.get_categorization_dict_path()
 
     def __init__(self):
         self.dictionary_1 = dictread.load_dict(self.dictionary_filename_1)
@@ -34,6 +36,7 @@ class RetrieveFromLevelDictionaries(interface.WordChooserInterface):
         self.dictionary_4 = dictread.load_dict(self.dictionary_filename_4)
         self.dictionary_5 = dictread.load_dict(self.dictionary_filename_5)
         self.dictionary_6 = dictread.load_dict(self.dictionary_filename_6)
+        self.word_cat_dict = dictread.load_dict(self.word_category_filepath)
 
         self.previous_translation = ""
 
@@ -41,9 +44,21 @@ class RetrieveFromLevelDictionaries(interface.WordChooserInterface):
         self.dictionary = self.dictionary_1
 
     def get_word_and_translation(self, level):
-        word = random.choice(self.dictionary.keys())
+
+        word = self.get_random_canon_word()
         translation = self.dictionary[word]
         return word, translation
+    
+    def get_random_canon_word(self):
+
+        """Chord returned will be canon or uncategorized."""
+
+        word = random.choice(self.dictionary.keys())
+        if word in self.word_cat_dict and \
+           self.word_cat_dict[word] != wordstochords.CANON:
+            return self.get_random_canon_word()
+
+        return word
 
     def set_level(self, level):
         self.dictionary = eval("self.dictionary_%s" % level)
