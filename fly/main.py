@@ -12,7 +12,6 @@ import sys
 # this as a script.
 sys.path.append(os.path.dirname(os.getcwd()))
 
-import threading
 import pygame
 import logging
 
@@ -27,27 +26,6 @@ from fly.statistics import gatherer
 from fly.gui import startup as startup_caption
 from fly.gui import constants
 from fly.gui import collection
-
-
-class StoppableThread(threading.Thread):
-
-    """
-    Thread class with a stop() method. The thread itself has to check
-    regularly for the stopped() condition.
-    
-    Thanks to: http://stackoverflow.com/questions/323972/
-    is-there-any-way-to-kill-a-thread-in-python
-    """
-
-    def __init__(self):
-        threading.Thread.__init__(self)
-        self._stop = threading.Event()
-
-    def stop(self):
-        self._stop.set()
-
-    def stopped(self):
-        return self._stop.isSet()
 
 
 # Global variables, so can be accessed in main
@@ -76,13 +54,12 @@ def translation_received(translationObj, overflow):
     chord = translationObj.rtfcre
 
 
-class Main(StoppableThread):
+class Main(object):
 
     """This class runs Fly."""
     
     def __init__(self):
 
-        StoppableThread.__init__(self)
         logging.info("Started!")
 
         # Centre window on screen
@@ -149,8 +126,9 @@ class Main(StoppableThread):
             self.plover_control.start()
             self.new_word_to_type()
 
-            while not self.stopped():
-                self.main_loop()
+            running = True
+            while running:
+                running = self.main_loop()
 
         finally:
             self.plover_control.stop()
@@ -175,7 +153,10 @@ class Main(StoppableThread):
         self.set_translation_blank()
     
         # Check for mouse clicks or key presses etc.
-        self.process_events()
+        running = self.process_events()
+        if not running:
+            return False
+
         self.gui.act_on_hint_key_press()
        
         # Display word user should type.
@@ -221,6 +202,8 @@ class Main(StoppableThread):
             self.lesson_model.set_word_chooser(word_chooser)
             self.new_word_to_type()
 
+        return True
+
     def new_word_to_type(self):
 
         """Generate a new word for the user to type."""
@@ -253,7 +236,7 @@ class Main(StoppableThread):
 
         for event in pygame.event.get():
             if self.event_is_quit(event):
-                self.stop()
+                return False
             
             elif self.event_is_lose_focus(event):
                 self.plover_control.suspend()
@@ -274,6 +257,8 @@ class Main(StoppableThread):
 
             elif self.event_is_key_down(event):
                 self.gui.on_key_down(event)
+
+        return True
 
     def event_is_quit(self, event):
         """Return True if event is quit game"""
@@ -313,6 +298,6 @@ class Main(StoppableThread):
 if __name__ == "__main__":
 
     main = Main()
-    main.start()
+    main.run()
 
 
