@@ -56,9 +56,9 @@ class PloverControl(object):
 
         config = conf.get_config()
         machine_type = config.get(conf.MACHINE_CONFIG_SECTION,
-                                       conf.MACHINE_TYPE_OPTION)
+                                  conf.MACHINE_TYPE_OPTION)
         machine_module = conf.import_named_module(machine_type,
-                                                       machine.supported)
+                                                  machine.supported)
         if machine_module is None:
             raise ValueError('Invalid configuration value for %s: %s' %
                              (conf.MACHINE_TYPE_OPTION, machine_type))
