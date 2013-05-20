@@ -69,4 +69,4 @@ WORDS_BEFORE_WORD_ADDED = 5
 """For lessons only"""
 # Force translation of lesson files to chords when Fly starts, even if 
 # translation files already exist (useful only if code has changed)
-FORCE_LESSON_REGENERATION = True
+FORCE_LESSON_REGENERATION = False
