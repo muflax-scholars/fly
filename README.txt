@@ -1,9 +1,11 @@
-Copyright (c) 2012 Pragma Nolint.
+Original copyright (c) 2012 Pragma Nolint. 
 See LICENSE.txt for details.
 Note: Some code based on pygame "Type Game" by Pawel Krawczak (diavel) 
 released under license "You're free do to whatever you want with this 
 program.".
 
+This version was forked from <https://launchpad.net/flyploverfly> by muflax
+<mail@muflax.com>.
 
 Fly: Training program for Plover, Open Source Stenography Software
 
@@ -74,4 +76,4 @@ AUTHORS
 
 Pragma Nolint
 Michael Roberts
-
+muflax
