@@ -5,7 +5,7 @@
 
 """Color options"""
 # Available colour schemes: "classic", "light", "highcontrast"
-COLOR_SCHEME = "classic"
+COLOR_SCHEME = "light"
 
 """Initial display settings"""
 # Display word and translation side by side
@@ -54,14 +54,14 @@ HINT_OPTIONS="KeyHighlighting, ChordToTypeDisplay"
 WORDS_DELTA_TO_LEVEL_UP = 5
 
 # What is the minimum accuracy the user must attain to level up?
-ACCURACY_FRACTION_THRESHOLD = 0.5
+ACCURACY_FRACTION_THRESHOLD = 0.90
 
 # How many words per minute must a user type to level up? 
 SPEED_WORDS_PER_MIN_THRESHOLD = 20
 
 """For lessons with <introduce_increment> retrieval directive only"""
 # How many words should be in list at start
-BASE_WORD_NUMBER = 5
+BASE_WORD_NUMBER = 3
 
 # Number of words that must be correct before new word added
 WORDS_BEFORE_WORD_ADDED = 5
@@ -69,6 +69,4 @@ WORDS_BEFORE_WORD_ADDED = 5
 """For lessons only"""
 # Force translation of lesson files to chords when Fly starts, even if 
 # translation files already exist (useful only if code has changed)
-FORCE_LESSON_REGENERATION = False
-
-
+FORCE_LESSON_REGENERATION = True
