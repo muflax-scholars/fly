@@ -6,51 +6,51 @@ from plover.machine.base import StenotypeBase
 from plover import keyboardcontrol
 
 KEYCODE_TO_STENO_KEY = {
-    10: "S-",   # 1
-    11: "T-",   # 2
-    12: "P-",   # 3
-    13: "H-",   # 4
-    14: "*",    # 5
-    15: "#",    # 6
-    16: "-F",   # 7
-    17: "-P",   # 8
-    18: "-L",   # 9
-    19: "-T",   # 0
-    20: "-D",   # -
-    21: "-T-D", # = 
+    10: "S-",    # 1
+    11: "T-",    # 2
+    12: "P-",    # 3
+    13: "H-",    # 4
+    14: "*",     # 5
+    15: "#",     # 6
+    16: "-F",    # 7
+    17: "-P",    # 8
+    18: "-L",    # 9
+    19: "-T",    # 0
+    20: "-D",    # -
+    21: "-T -D", # = 
 
-    24: "S-",   # q
-    25: "K-",   # w
-    26: "W-",   # e
-    27: "R-",   # r
-    28: "*",    # t
-    29: "*",    # y
-    30: "-R",   # u
-    31: "-B",   # i
-    32: "-G",   # o
-    33: "-S",   # p
-    34: "-Z",   # [
-    35: "-S-Z", # ]
+    24: "S-",    # q
+    25: "K-",    # w
+    26: "W-",    # e
+    27: "R-",    # r
+    28: "*",     # t
+    29: "*",     # y
+    30: "-R",    # u
+    31: "-B",    # i
+    32: "-G",    # o
+    33: "-S",    # p
+    34: "-Z",    # [
+    35: "-S -Z", # ]
     
-    38: "#",    # a
-    39: "T-K-", # s
-    40: "P-W-", # d
-    41: "H-R-", # f
-    42: "#",    # g
-    43: "#",    # h
-    44: "-F-R", # j
-    45: "-P-B", # k
-    46: "-L-G", # l
-    47: "-T-S", # ;
-    48: "-D-Z", # '
+    38: "#",     # a
+    39: "T- K-", # s
+    40: "P- W-", # d
+    41: "H- R-", # f
+    42: "#",     # g
+    43: "#",     # h
+    44: "-F -R", # j
+    45: "-P -B", # k
+    46: "-L -G", # l
+    47: "-T -S", # ;
+    48: "-D -Z", # '
     
-    53: "A-O-", # x
-    54: "A-",   # c
-    55: "O-",   # v
+    53: "A- O-", # x
+    54: "A-",    # c
+    55: "O-",    # v
     
-    57: "-E",   # n
-    58: "-U",   # m
-    59: "-E-U", # ,
+    57: "-E",    # n
+    58: "-U",    # m
+    59: "-E -U", # ,
 }
 
 class Stenotype(StenotypeBase):
@@ -89,8 +89,13 @@ class Stenotype(StenotypeBase):
         self._released_keys.add(event.keycode)
         # A stroke is complete if all pressed keys have been released.
         if self._down_keys == self._released_keys:
-            steno_keys = [KEYCODE_TO_STENO_KEY[k] for k in self._down_keys
-                          if k in KEYCODE_TO_STENO_KEY]
+            # Map pressed keys into steno keys and plit multi-key keys into
+            # individual keys.
+            steno_keys = []
+            for k in self._down_keys:
+                if k in KEYCODE_TO_STENO_KEY:
+                    steno_keys.extend(KEYCODE_TO_STENO_KEY[k].split(" "))
+                
             self._down_keys.clear()
             self._released_keys.clear()
             self._notify(steno_keys)
