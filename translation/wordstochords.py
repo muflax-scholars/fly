@@ -61,61 +61,57 @@ class ChordHolder(object):
 
         return random.choice(self.chord_list)
 
-    def get_canon_chord(self, categorization_dict):
+    def get_canon_chord(self):
 
         """Return canon chord if possible, or nearest alternative.
-        
-        @param categorization_dict: dict used to categorize chords.
-            For example (dummy data only) {"PARD": "unknown", 
-                                           "AUL": "canon"}
-        @type categorization_dict: dict of str: str
         
         @return: steno chord
         @rtype: str
         """
 
-        chord_categories = {}
-        for chord in self.chord_list:
-            if chord in categorization_dict:
-                chord_category = categorization_dict[chord]
-                chord_categories[chord_category] = chord
-            else:
-                logger.info("Uncategorized chord: %s."
-                            " Please run fly.data.generation.categoriser to "
-                            "categorize uncategorized words." % chord)
+        # chord_categories = {}
+        # for chord in self.chord_list:
+        #     if chord in categorization_dict:
+        #         chord_category = categorization_dict[chord]
+        #         chord_categories[chord_category] = chord
+        #     else:
+        #         logger.info("Uncategorized chord: %s."
+        #                     " Please run fly.data.generation.categoriser to "
+        #                     "categorize uncategorized words." % chord)
 
-        if not chord_categories:
-            logger.info("No categorization found for any chords, "
-                        "returning random.")
-            return self.get_random_chord()
+        # if not chord_categories:
+        #     logger.info("No categorization found for any chords, "
+        #                 "returning random.")
+        #     return self.get_random_chord()
         
-        if CANON in chord_categories:
-            return chord_categories[CANON]
+        # if CANON in chord_categories:
+        #     return chord_categories[CANON]
 
-        if ALTERNATIVE in chord_categories:
-            return chord_categories[ALTERNATIVE]
+        # if ALTERNATIVE in chord_categories:
+        #     return chord_categories[ALTERNATIVE]
 
-        if UNKNOWN in chord_categories:
-            logger.info("No 'canon' or 'alternative' found! Using chord with "
-                        "'unknown' category %s" % chord_categories[UNKNOWN])
-            return chord_categories[UNKNOWN]
+        # if UNKNOWN in chord_categories:
+        #     logger.info("No 'canon' or 'alternative' found! Using chord with "
+        #                 "'unknown' category %s" % chord_categories[UNKNOWN])
+        #     return chord_categories[UNKNOWN]
 
-        if BRIEF in chord_categories:
-            logger.info("No 'canon', 'alternative' or 'unknown' found! Using "
-                        "chord with 'brief' "
-                        "category %s" % chord_categories[BRIEF])
-            return chord_categories[BRIEF]
+        # if BRIEF in chord_categories:
+        #     logger.info("No 'canon', 'alternative' or 'unknown' found! Using "
+        #                 "chord with 'brief' "
+        #                 "category %s" % chord_categories[BRIEF])
+        #     return chord_categories[BRIEF]
 
-        if MISSTROKE in chord_categories:
-            logger.info("No 'canon', 'alternative', 'unknown' or 'brief' "
-                        "found! Run out of options. Using chord "
-                        "with 'misstroke' "
-                        "category %s" % chord_categories[MISSTROKE])
-            return chord_categories[MISSTROKE]
+        # if MISSTROKE in chord_categories:
+        #     logger.info("No 'canon', 'alternative', 'unknown' or 'brief' "
+        #                 "found! Run out of options. Using chord "
+        #                 "with 'misstroke' "
+        #                 "category %s" % chord_categories[MISSTROKE])
+        #     return chord_categories[MISSTROKE]
 
-        logger.info("Unexpected categories found: %s. Returning random "
-                    "chord." % chord_categories)
-        return self.get_random_chord()
+        # logger.info("Unexpected categories found: %s. Returning random "
+        #             "chord." % chord_categories)
+        # return self.get_random_chord()
+        return ""
                 
     def get_easiest_chord(self):
 
@@ -165,8 +161,6 @@ class WordToChordTranslator(object):
         """
 
         self.inverse_dict = self.__get_inverse_dict(dictionary)
-        cat_dict_path = fileutils.get_categorization_dict_path()
-        self.categorization_dict = dictionaryreader.load_dict(cat_dict_path)
     
     def __get_inverse_dict(self, dictionary):
 
@@ -287,8 +281,7 @@ class WordToChordTranslator(object):
         first_try_handler = WordAsIs(self.inverse_dict)
         second_try_handler = WordLowerCase(self.inverse_dict)
         third_try_handler = WordPunctuationWithCaret(self.inverse_dict)
-        fourth_try_handler = WordEndsApostropheEss(self.inverse_dict, 
-                                                   self.categorization_dict)
+        fourth_try_handler = WordEndsApostropheEss(self.inverse_dict)
         fifth_try_handler = WordIsMrOrMrs(self.inverse_dict)
         default_handler = WordUndefined(self.inverse_dict)
         
@@ -299,7 +292,7 @@ class WordToChordTranslator(object):
         fifth_try_handler.successor = default_handler
 
         chord_holder = first_try_handler.handle(word)
-        chord = chord_holder.get_canon_chord(self.categorization_dict)
+        chord = chord_holder.get_canon_chord()
         return chord
 
 
@@ -389,25 +382,22 @@ class WordEndsApostropheEss(WordCaseHandler):
     so append that to end.
     """
     
-    def __init__(self, inverse_dict, categorization_dict):
+    def __init__(self, inverse_dict):
 
         """
         @param inverse_dict: dict of {english: chord holder with all steno 
                              representations of english word}
         @type inverse_dict: {str: L{ChordHolder}}
-        @param categorization_dict: dict used to categorize chords.
-        @type categorization_dict: dict of str: str
         """
 
         WordCaseHandler.__init__(self, inverse_dict)
-        self.categorization_dict = categorization_dict
 
     def handle(self, word):
         if word.endswith("'s"):
             bare_word = word.rstrip("'s")
             if bare_word in self.inverse_dict:
                 chord = self.inverse_dict[bare_word].\
-                        get_canon_chord(self.categorization_dict)
+                        get_canon_chord()
                 if chord:
                     return ChordHolder('%s/A*ES' % chord)
         # Nope, not applicable. Move on to next handler.

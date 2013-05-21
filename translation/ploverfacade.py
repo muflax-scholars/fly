@@ -156,5 +156,3 @@ def get_ordering(steno_key):
             steno_key = "O-"
     
     return steno.STENO_KEY_ORDER[steno_key]
-
-

@@ -13,7 +13,6 @@ import logging
 logger = logging.getLogger(__name__)
 
 from fly.models.wordchooser import randomize
-from fly.models.wordchooser import incremental
 from fly.models.wordchooser import inorder
 from fly.lessons.helpers.directive import DirectiveInterpreter
 
@@ -25,8 +24,6 @@ class LessonWordChooserMapper(object):
     # Map retrieval directives to word choosers.
     RETRIEVAL_MAP = {DirectiveInterpreter.RETRIEVAL_RANDOMIZE_DIRECTIVE:\
                                     randomize.RetrieveRandomize,
-                     DirectiveInterpreter.RETRIEVAL_INCREMENT_DIRECTIVE:\
-                                    incremental.RetrieveIntroduceIncrement,
                      DirectiveInterpreter.RETRIEVAL_IN_ORDER_DIRECTIVE:\
                                     inorder.RetrieveInOrder}
 

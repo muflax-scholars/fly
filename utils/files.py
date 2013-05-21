@@ -21,16 +21,6 @@ def get_plover_dict_path():
     return os.path.join(get_dictionaries_directory(), 'dict.json')
 
 
-def get_level_dict_path(level):
-    """Return the file path to the level dict specified."""
-    return os.path.join(get_dictionaries_directory(),
-                        'dict_level_%s.json' % level)
-
-def get_categorization_dict_path():
-    """Return the file path to the categorization dict."""
-    return os.path.join(get_dictionaries_directory(),
-                        'word_category.json')
-
 def get_lessons_directory():
     """Get the directory with the lesson files."""
     return os.path.join(get_base_directory(), 'data', 'lessons')
@@ -39,9 +29,3 @@ def get_lessons_directory():
 def get_test_data_directory():
     """Return the file path to the directory containing test data."""
     return os.path.join(get_base_directory(), 'tests', 'data')
-
-def get_lesson_words_categories_dict_path():
-    """Return the file path to the word:category dict for the lessons."""
-    return os.path.join(get_dictionaries_directory(), 
-                        'word_category.json')
-
