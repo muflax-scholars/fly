@@ -54,4 +54,7 @@ class WordChooserInterface(object):
 
         return input_word, input_translation
 
-    
+    def is_done(self):
+        """Returns true if there are no more words to practice."""
+
+        return False

@@ -178,3 +178,8 @@ class GameModel(interface.InteractionModelInterface):
                                                                self.input_word)
 
 
+    def is_done(self):
+        """Returns true if the current lesson is over and has no more words to
+        practice."""
+
+        return self.word_chooser.is_done()

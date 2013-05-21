@@ -136,51 +136,54 @@ class Main(object):
 
         global translation, chord
         self.gui.reset()
-
-        # Tell model about user input.
-        self.model.set_input_word_and_translation(chord, translation)
-
-        # Give model a chance to alter word and translation in case what plover
-        # provided is not what the model wants.
-        word_and_trans = self.model.get_chord_and_translation()
-
-        # Display user input.
-        self.gui.set_input_word_and_translation(word_and_trans[0], 
-                                                word_and_trans[1])
-        self.set_translation_blank()
     
         # Check for mouse clicks or key presses etc.
         running = self.process_events()
         if not running:
             return False
 
-        self.gui.act_on_hint_key_press()
-       
-        # Display word user should type.
-        self.gui.show_word_to_type(self.model.get_qwerty_letters_to_type())
-        if self.model.right_word_entered():
-            self.model.clear_inputs()
-            self.gui.on_right_word_entered()
-            self.model.on_right_word_entered()
-            self.stats.on_right_word_entered()
-
-            # Reset with new word
-            self.new_word_to_type()
-
-        elif self.model.wrong_word_entered():
-            # Record that a wrong word was entered for the accuracy count.
-            self.model.on_wrong_word_entered()
-            self.stats.on_wrong_word_entered()
-
-        else:
-            # Word has not been completed
+        if self.model.is_done():
+            # Show success message.
             pass
-        
-        # Update speed bar
-        words_per_minute = self.stats.get_words_per_min()
-        accuracy = self.stats.get_fraction_accurate()
-        self.gui.update_speed_bar(words_per_minute, accuracy)
-       
+        else:
+            # Tell model about user input.
+            self.model.set_input_word_and_translation(chord, translation)
+
+            # Give model a chance to alter word and translation in case what
+            # plover provided is not what the model wants.
+            word, trans = self.model.get_chord_and_translation()
+
+            # Display user input.
+            self.gui.set_input_word_and_translation(word, trans)
+            self.set_translation_blank()
+            
+            self.gui.act_on_hint_key_press()
+            
+            # Display word user should type.
+            self.gui.show_word_to_type(self.model.get_qwerty_letters_to_type())
+            if self.model.right_word_entered():
+                self.model.clear_inputs()
+                self.gui.on_right_word_entered()
+                self.model.on_right_word_entered()
+                self.stats.on_right_word_entered()
+
+                # Reset with new word
+                self.new_word_to_type()
+
+            elif self.model.wrong_word_entered():
+                # Record that a wrong word was entered for the accuracy count.
+                self.model.on_wrong_word_entered()
+                self.stats.on_wrong_word_entered()
+
+            else:
+                # Word has not been completed
+                pass
+
+            # Update speed bar
+            words_per_minute = self.stats.get_words_per_min()
+            accuracy = self.stats.get_fraction_accurate()
+            self.gui.update_speed_bar(words_per_minute, accuracy)
+
         # Update display
         self.screen.fill(constants.CANVAS_COLOR)
         self.gui.draw(self.screen)

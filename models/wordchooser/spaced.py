@@ -37,39 +37,52 @@ class RetrieveSpaced(interface.WordChooserInterface):
         # what words to display next
         self.queue     = []
         self.last_word = None
-        self.was_wrong = False
+        self.open_word = False
         
         self.word_translation_dict = word_translation_dict
 
     def get_word_and_translation(self):
         # add new word to beginning of learning queue if it's small enough
-        if len(self.queue) < self.minimum_queue_size:
+        if len(self.queue) < self.minimum_queue_size and self.new_queue:
             new_word = self.new_queue.pop(0)
             self.queue.insert(0, new_word)
 
         # remove word from learning queue
-        word = self.queue.pop(0)
+        if self.queue:
+            word = self.queue.pop(0)
+            # remember that we still have an unanswered word
+            self.last_word = word
+            self.open_word = True
+        else:
+            word = self.last_word
+            self.open_word = False
+            
         translation = self.word_translation_dict[word]
-        self.last_word = word
-        self.was_wrong = True
         
         return word, translation
 
     def on_right_word_entered(self):
         word = self.last_word
-        
+
         # reinsert word into queue if necessary
         spacing = self.spacing[word] * self.spacing_factor
         if spacing < self.max_spacing:
             self.spacing[word] = spacing
             self.queue.insert(int(round(spacing)), word)
 
+        # done with this word
+        self.open_word = False
+
     def on_wrong_word_entered(self):
         word = self.last_word
         
         # reset spacing and reinsert word into queue
-        if self.was_wrong == False:
+        if self.open_word == True:
             spacing = self.initial_spacing
             self.spacing[word] = spacing
             self.queue.insert(int(round(spacing)), word)
-            self.was_wrong = True
+            self.open_word = False
+
+    def is_done(self):
+        return not (self.open_word or self.queue or self.new_queue)
+        
