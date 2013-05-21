@@ -119,8 +119,6 @@ class GameOptionsPanelGUI(interface.GUIElementInterface):
     If in lesson mode, also allow the choice of lessons.
     """
 
-    ALPHABET_MODE = threemode.ALPHABET_MODEL_NAME
-    WORD_MODE = threemode.WORD_MODEL_NAME
     LESSON_MODE = threemode.LESSON_MODEL_NAME
 
     def __init__(self, info_panel, lesson_names):
@@ -136,77 +134,22 @@ class GameOptionsPanelGUI(interface.GUIElementInterface):
         self.info_panel = info_panel
         self.buttons = []
 
-        self.mode = self.ALPHABET_MODE
+        self.mode = self.LESSON_MODE
        
         self.lesson_names = lesson_names
         self.lesson_index = 0
         self.current_lesson_name = self.lesson_names[self.lesson_index]
 
-        self.__add_alphabet_button()
-        self.__add_word_button()        
         self.__add_lesson_button()
         self.__add_lesson_chooser_button()
-
-    def __add_alphabet_button(self):
-
-        """Add button which, when pressed, activates alphabet mode."""
-
-        self.alphabet_mode_button, self.alphabet_mode_help_button = \
-                self.__get_button_and_sub_button(1, "Alphabet Mode")
-        self.alphabet_mode_button.onclick = self.__alphabet_mode_set
-        self.alphabet_mode_help_button.onclick = \
-                self.__display_alphabet_mode_info
-        self.alphabet_mode_button.set_active(True)
-        self.buttons.append(self.alphabet_mode_button)
-        self.buttons.append(self.alphabet_mode_help_button)
-
-    def __alphabet_mode_set(self):
-
-        """Called when alphabet mode button is clicked on."""
-
-        self.alphabet_mode_button.set_active(True)
-        self.word_mode_button.set_active(False)
-        self.lesson_mode_button.set_active(False)
-        self.mode = self.ALPHABET_MODE
-
-    def __display_alphabet_mode_info(self):
-
-        """Called when the '?' next to the alphabet button is clicked."""
-
-        self.info_panel.set_info(c.ALPHABET_INFO_TEXT)
-
-    def __add_word_button(self):
-
-        """Add button which, when pressed, activates word mode."""
-
-        self.word_mode_button, self.word_mode_help_button = \
-                self.__get_button_and_sub_button(2, "Word Mode")
-        self.word_mode_button.onclick = self.__word_mode_set
-        self.word_mode_help_button.onclick = self.__display_word_mode_info
-        self.buttons.append(self.word_mode_button)
-        self.buttons.append(self.word_mode_help_button)
-
-    def __word_mode_set(self):
-
-        """Called when word mode button is clicked on."""
-
-        self.alphabet_mode_button.set_active(False)
-        self.word_mode_button.set_active(True)
-        self.lesson_mode_button.set_active(False)
-        self.mode = self.WORD_MODE
-
-    def __display_word_mode_info(self):
-
-        """Called when the '?' next to the word button is clicked."""
-
-        self.info_panel.set_info(c.WORD_INFO_TEXT)
+        self.__lesson_mode_set()
 
     def __add_lesson_button(self):
 
         """Add button which, when pressed, activates lesson mode."""
 
         self.lesson_mode_button, self.lesson_mode_help_button = \
-                self.__get_button_and_sub_button(3, "Lesson Mode")
+                self.__get_button_and_sub_button(1, "Lesson Mode")
         self.lesson_mode_button.onclick = self.__lesson_mode_set
         self.lesson_mode_help_button.onclick = self.__display_lesson_mode_info
         self.buttons.append(self.lesson_mode_button)
@@ -216,8 +159,6 @@ class GameOptionsPanelGUI(interface.GUIElementInterface):
         
         """Called when lesson mode button is clicked on."""
 
-        self.alphabet_mode_button.set_active(False)
-        self.word_mode_button.set_active(False)
         self.lesson_mode_button.set_active(True)
 
         # When lesson mode is activated, display the current lesson
@@ -236,7 +177,7 @@ class GameOptionsPanelGUI(interface.GUIElementInterface):
 
         """Add 'go right' button to switch to the next lesson in the list."""
 
-        buttons = self.__get_button_and_sub_button(4, 
+        buttons = self.__get_button_and_sub_button(2, 
                                                    self.current_lesson_name, 
                                                    ">", 
                                                    indent=True)

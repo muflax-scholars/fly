@@ -91,16 +91,13 @@ class Main(object):
         lesson_names = self.lesson_control.get_lesson_names()
         self.gui = collection.ElementsCollection(lesson_names)
        
-        # Load models
-        self.alphabet_model = threemode.get_alphabet_model()
-        self.update_startup_caption("Loading [33%]")
-        self.word_model = threemode.get_word_model() 
+        # Load lesson model
         self.update_startup_caption("Loading [66%]")
         self.lesson_model = threemode.get_lesson_model(self.gui,
                                                        self.lesson_control)
         self.update_startup_caption("Loading [100%]")
 
-        self.model = self.alphabet_model
+        self.model = self.lesson_model
         self.current_model_name = self.model.name
 
     def update_startup_caption(self, text):
@@ -187,9 +184,6 @@ class Main(object):
         self.gui.draw(self.screen)
         pygame.display.flip()
 
-        # Switch model if user has changed models
-        self.switch_model()
-
         # Set level (up or down)
         level = self.stats.get_level()
         self.model.switch_level(level)
@@ -213,23 +207,6 @@ class Main(object):
                 self.model.get_display_word_and_translation() 
         self.gui.set_word_to_type(target_chord, target_translation)
     
-    def switch_model(self):
-
-        """Check which model the GUI is set to and switch if necessary."""
-
-        model_name = self.gui.get_model_to_use()
-        if model_name == self.model.name:
-            return
-
-        if model_name == threemode.ALPHABET_MODEL_NAME:
-            self.model = self.alphabet_model
-        elif model_name == threemode.WORD_MODEL_NAME:
-            self.model = self.word_model
-        else:
-            self.model = self.lesson_model
-        
-        self.new_word_to_type()
-
     def process_events(self):
 
         """Check if any events have been triggered and process them."""
