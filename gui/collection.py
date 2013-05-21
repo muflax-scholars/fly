@@ -196,3 +196,7 @@ class ElementsCollection(object):
 
         self.options_panel.act_on_hint_key_press()
 
+    def set_done(self):
+        """Show that the current lesson is over."""
+        
+        self.text_input.sentence_info_caption.set_text("Lesson done!")

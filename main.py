@@ -144,7 +144,7 @@ class Main(object):
 
         if self.model.is_done():
             # Show success message.
-            pass
+            self.gui.set_done()
         else:
             # Tell model about user input.
             self.model.set_input_word_and_translation(chord, translation)
@@ -179,10 +179,10 @@ class Main(object):
                 # Word has not been completed
                 pass
 
-            # Update speed bar
-            words_per_minute = self.stats.get_words_per_min()
-            accuracy = self.stats.get_fraction_accurate()
-            self.gui.update_speed_bar(words_per_minute, accuracy)
+        # Update speed bar
+        words_per_minute = self.stats.get_words_per_min()
+        accuracy = self.stats.get_fraction_accurate()
+        self.gui.update_speed_bar(words_per_minute, accuracy)
 
         # Update display
         self.screen.fill(constants.CANVAS_COLOR)
