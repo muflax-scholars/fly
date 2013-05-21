@@ -161,6 +161,7 @@ class Main(object):
         if self.model.right_word_entered():
             self.model.clear_inputs()
             self.gui.on_right_word_entered()
+            self.model.on_right_word_entered()
             self.stats.on_right_word_entered()
 
             # Reset with new word
@@ -168,6 +169,7 @@ class Main(object):
 
         elif self.model.wrong_word_entered():
             # Record that a wrong word was entered for the accuracy count.
+            self.model.on_wrong_word_entered()
             self.stats.on_wrong_word_entered()
 
         else:

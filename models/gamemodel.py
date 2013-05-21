@@ -152,6 +152,19 @@ class GameModel(interface.InteractionModelInterface):
             return True
         return False
 
+    def on_right_word_entered(self):
+        """Tell WordChooser that the correct word was entered so it can take
+        that into account."""
+
+        self.word_chooser.on_right_word_entered()
+
+    def on_wrong_word_entered(self):
+        """Tell WordChooser that the wrong word was entered so it can take
+        that into account."""
+
+        self.word_chooser.on_wrong_word_entered()
+
+        
     def get_qwerty_letters_to_type(self):
 
         """Get a list of the qwerty letters that should be pressed next.

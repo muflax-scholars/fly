@@ -26,6 +26,16 @@ class WordChooserInterface(object):
 
         pass
 
+    def on_right_word_entered(self):
+        """The correct word was entered."""
+
+        pass
+
+    def on_wrong_word_entered(self):
+        """The wrong word was entered."""
+
+        pass
+
     def return_inputs(self, input_word, input_translation):
 
         """Return the input word and translation.
