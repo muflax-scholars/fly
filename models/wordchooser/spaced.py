@@ -53,8 +53,6 @@ class RetrieveSpaced(interface.WordChooserInterface):
         self.last_word = word
         self.was_wrong = True
         
-        print self.queue
-        
         return word, translation
 
     def on_right_word_entered(self):

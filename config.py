@@ -49,23 +49,6 @@ DISPLAY_STENO_COLOR = False
 # "KeyStenoText, ChordToTypeDisplay"
 HINT_OPTIONS="KeyHighlighting, ChordToTypeDisplay"
 
-"""Levelling up and down"""
-# How many words should be presented before the user can change levels?
-WORDS_DELTA_TO_LEVEL_UP = 5
-
-# What is the minimum accuracy the user must attain to level up?
-ACCURACY_FRACTION_THRESHOLD = 0.90
-
-# How many words per minute must a user type to level up? 
-SPEED_WORDS_PER_MIN_THRESHOLD = 20
-
-"""For lessons with <introduce_increment> retrieval directive only"""
-# How many words should be in list at start
-BASE_WORD_NUMBER = 3
-
-# Number of words that must be correct before new word added
-WORDS_BEFORE_WORD_ADDED = 5
-
 """For lessons only"""
 # Force translation of lesson files to chords when Fly starts, even if 
 # translation files already exist (useful only if code has changed)

@@ -186,10 +186,6 @@ class Main(object):
         self.gui.draw(self.screen)
         pygame.display.flip()
 
-        # Set level (up or down)
-        level = self.stats.get_level()
-        self.model.switch_level(level)
-
         # Set the lesson model word chooser based on the lesson chosen in UI.
         # Only applies to the game if lesson model in use.
         lesson = self.gui.get_current_lesson_name()

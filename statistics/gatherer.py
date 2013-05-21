@@ -5,17 +5,15 @@
 
 from fly.statistics.helpers.timer import Timer
 from fly.statistics.helpers.accuracy import AccuracyMeter
-from fly.statistics.helpers.judge import LevellerJudge
 
 
 class StatisticGatherer(object):
 
-    """Provides stats, and uses stats to judge whether use should progress."""
+    """Provides stats."""
 
     def __init__(self):
         self.timer = Timer()
         self.accuracy_meter = AccuracyMeter()
-        self.level_judge = LevellerJudge()
 
     def on_right_word_entered(self):
 
@@ -50,18 +48,3 @@ class StatisticGatherer(object):
         """
 
         return self.accuracy_meter.get_fraction_accurate()
-
-    def get_level(self):
-
-        """Judge user on speed and accuracy to determine their level.
-        
-        @return: level user is on. 
-        @rtype: int
-        """
-
-        total_words = self.accuracy_meter.get_word_count()
-        speed = self.get_words_per_min()
-        accuracy = self.get_fraction_accurate()
-        return self.level_judge.get_level(total_words, accuracy, speed)
-
-
