@@ -153,7 +153,7 @@ class KeyboardKey(DrawableElementInterface):
         self.display_qwerty = config.DISPLAY_QWERTY_KEYS
         self.display_steno = config.DISPLAY_STENO_KEYS
         self.highlight_keys = config.DISPLAY_KEY_HIGHLIGHTING
-        
+
         self.recolor_keys()
 
     def recolor_keys(self):
@@ -270,19 +270,20 @@ class KeyboardKey(DrawableElementInterface):
         @type key: int
         """
 
-        if key == 91:
-            if self.caption == "[":
-                self.pressed = True
-        elif key == 93:
-            if self.caption == "]":
-                self.pressed = True
-        elif key == 304: # Left shift
-            self.toggle_hint = True
-        elif key in range(256):
-            if self.caption.lower() == chr(key):
-                self.pressed = True
-        else:
-            logger.debug("Unknown key %s" % key)
+        if config.DISPLAY_PRESSED_KEY_HIGHLIGHTING:
+            if key == 91:
+                if self.caption == "[":
+                    self.pressed = True
+            elif key == 93:
+                if self.caption == "]":
+                    self.pressed = True
+            elif key == 304: # Left shift
+                self.toggle_hint = True
+            elif key in range(256):
+                if self.caption.lower() == chr(key):
+                    self.pressed = True
+            else:
+                logger.debug("Unknown key %s" % key)
 
 
 class DisplayPanel(DrawableElementInterface):

@@ -24,6 +24,9 @@ DISPLAY_INFO_PANEL = True
 # This can be toggled in the GUI with "Toggle Key Highlighting"
 DISPLAY_KEY_HIGHLIGHTING = True
 
+# Highlight what key was pressed
+DISPLAY_PRESSED_KEY_HIGHLIGHTING = False
+
 # Display input chord
 # This can be toggled in the GUI with "Toggle Input Chord Display"
 DISPLAY_INPUT_CHORD = True

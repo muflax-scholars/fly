@@ -218,7 +218,7 @@ class KeyboardGUI(interface.GUIElementInterface):
         """
 
         for key in self.keys:
-            key.set_pressed(event.key)
+            key.set_pressed(event.scancode)
             self.previous_keys_pressed.append(key)
         
     def show_word_to_type(self, qwerty_letter_list):
