@@ -282,7 +282,7 @@ class KeyboardKey(DrawableElementInterface):
             if self.caption.lower() == chr(key):
                 self.pressed = True
         else:
-            logger.warning("Unknown key %s" % key)
+            logger.debug("Unknown key %s" % key)
 
 
 class DisplayPanel(DrawableElementInterface):
