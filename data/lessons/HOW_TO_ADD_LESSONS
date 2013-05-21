@@ -15,9 +15,9 @@ regenerated.
 On the first line of each lesson file, you can specify the options you want
 for retrieving the words and displaying them. Available options for retrieval 
 are:
-* randomize
-* introduce_increment
+* randomized
 * in_order
+* spaced
 You may only use ONE of these options. If more than one is specified, the last 
 one will be used.
 
@@ -28,7 +28,7 @@ You may only use ONE of these options. If more than one is specified, the last
 one will be used.
 
 You should specify these in angle brackets, such as:
-<randomize, word>
+<randomized, word>
 or 
 <in_order, sentence>
 
@@ -37,19 +37,16 @@ If the options are omitted, default options of <in_order, word> will be used.
 === WHAT THE OPTIONS ARE ===
 
 RETRIEVAL OPTIONS (use one of these)
-* randomize: 
+* randomized: 
 Retrieve words at random for the user to type.
-
-* introduce_increment:
-Start with a minimum of words, and add extra words when the user meets 
-accuracy/speed requirements (see fly/config.py for how to set the 
-requirements). Extra words are removed if the user doesn't meet requirements, 
-but the base words are always available.
 
 * in_order:
 Display the words to type in order, one at a time. The user must type a word 
 correctly before he/she can go on to the next word. When the last word is 
 reached, the lesson starts again at the beginning.
+
+* spaced:
+  Introduce words in order, but use spaced repetition to check correctness and only introduce new words slowly.
 
 DISPLAY OPTIONS (use one of these)
 * word:
@@ -77,6 +74,7 @@ words may not be defined in the dictionary. In these cases, the translation
 will be the fingerspelled word. Translation files can also be edited manually 
 if the translation process is not generating the chords that you want to 
 display.  
+
 * Once you've added the lesson to the data/lessons directory it will become 
 available in the GUI by entering Lesson Mode and clicking ">" until the name of
 your lesson appears. 

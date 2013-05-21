@@ -7,7 +7,7 @@ module configures the game model to create these models.
 """
 
 from fly.models import gamemodel as game_model
-from fly.models.wordchooser import randomize
+from fly.models.wordchooser import randomized
 from fly.models.inputinterpreter import word as input_word
 from fly.data import alphabetdict as ad
 

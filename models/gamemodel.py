@@ -36,19 +36,6 @@ class GameModel(interface.InteractionModelInterface):
         self.previous_word = ""
         self.input_word = ""
         self.input_translation = ""
-        self.current_level = 1
-
-    def switch_level(self, level):
-
-        """Set level of difficulty in choosing words to present.
-
-        @param level: levels are numbered 1 to 6, where 6 is the hardest.
-        @type level: int
-        """
-
-        if self.current_level != level:
-            self.word_chooser.set_level(level)
-            self.current_level = level
 
     def set_word_chooser(self, new_word_chooser):
 
@@ -64,8 +51,7 @@ class GameModel(interface.InteractionModelInterface):
 
         """Get a new word and translation, set on model for user to type."""
 
-        self.word, self.translation = \
-                self.word_chooser.get_word_and_translation(self.current_level)
+        self.word, self.translation = self.word_chooser.get_word_and_translation()
 
     def get_display_word_and_translation(self):
 
@@ -77,8 +63,7 @@ class GameModel(interface.InteractionModelInterface):
         @rtype: (str, str)
         """
 
-        level = self.current_level
-        result = self.word_chooser.get_display_word_and_translation(level)
+        result = self.word_chooser.get_display_word_and_translation()
         
         # Not forcing the word chooser to implement 
         # get_display_word_and_translation. If None is returned, not 

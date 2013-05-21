@@ -28,7 +28,7 @@ class RetrieveInOrder(interface.WordChooserInterface):
         self.word_translation_dict = word_translation_dict
         self.word_list = word_list
 
-    def get_word_and_translation(self, level):
+    def get_word_and_translation(self):
 
         if self.index >= len(self.word_list):
             self.index = 0
@@ -59,13 +59,13 @@ class RetrieveInOrderSentence(interface.WordChooserInterface):
         self.retriever = RetrieveInOrder(lesson.chord_translation_dict, 
                                          lesson.chords_list)
 
-    def get_word_and_translation(self, level):
+    def get_word_and_translation(self):
 
-        word, translation = self.retriever.get_word_and_translation(level)
+        word, translation = self.retriever.get_word_and_translation()
         self.index = self.retriever.get_current_word_index()
         return word, translation
     
-    def get_display_word_and_translation(self, level):
+    def get_display_word_and_translation(self):
 
         for sentence_ind, word_inds in self.lesson.sentence_map.iteritems():
             if self.index in word_inds:
@@ -121,5 +121,3 @@ class RetrieveInOrderSentence(interface.WordChooserInterface):
                 input_sentence = matchObj.group(0) + new_input
        
         return input_sentence
-
-

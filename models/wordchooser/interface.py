@@ -8,38 +8,20 @@ class WordChooserInterface(object):
 
     """Interface for specifying how a word is chosen for the user to type."""
     
-    def get_word_and_translation(self, level):
+    def get_word_and_translation(self):
 
         """Return a chord and the corresponding translation of the chord.
-        
-        @param level: levels are numbered 1 to 6, where 6 is the hardest.
-        @type level: int
         """
 
         raise NotImplementedError("Child classes must implement this method")
 
-    def get_display_word_and_translation(self, level):
+    def get_display_word_and_translation(self):
 
         """Get word and translation to be displayed in GUI.
 
         Optional. By default the display will not be any different from the 
         internal word/translation, but this can be overridden by word choosers
         if they need different behaviour.
-        
-        @param level: levels are numbered 1 to 6, where 6 is the hardest.
-        @type level: int
-        """
-
-        pass
-
-    def set_level(self, level):
-
-        """Set the level of difficulty the user should be presented with.
-
-        Optional. Doesn't have to apply to word chooser.
-
-        @param level: levels are numbered 1 to 6, where 6 is the hardest.
-        @type level: int
         """
 
         pass

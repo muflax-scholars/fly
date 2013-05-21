@@ -8,7 +8,7 @@ import random
 from fly.models.wordchooser import interface
 
 
-class RetrieveRandomize(interface.WordChooserInterface):
+class RetrieveRandomized(interface.WordChooserInterface):
 
     """Words are retrieved randomly from plover's dict."""
 
@@ -27,7 +27,7 @@ class RetrieveRandomize(interface.WordChooserInterface):
         self.word_translation_dict = word_translation_dict
         self.previous_translation = ""
     
-    def get_word_and_translation(self, level):
+    def get_word_and_translation(self):
         word, translation = self.__get_word_and_translation_from_dict()
         i = 0
         while translation == self.previous_translation:

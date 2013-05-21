@@ -57,5 +57,3 @@ class LessonToChords(object):
         chord_lines = '\n'.join(chord_lines_list)
         with open(chords_file_path, 'w') as f:
             f.write(chord_lines)
-
-

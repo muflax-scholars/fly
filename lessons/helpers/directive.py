@@ -19,17 +19,17 @@ class DirectiveInterpreter(object):
     
     # Names of directives expected to appear in lesson file
     # first line e.g. <randomize>
-    RETRIEVAL_RANDOMIZE_DIRECTIVE = 'randomize'
-    RETRIEVAL_INCREMENT_DIRECTIVE = 'introduce_increment'
-    RETRIEVAL_IN_ORDER_DIRECTIVE = 'in_order'
+    RETRIEVAL_RANDOMIZED_DIRECTIVE = 'randomized'
+    RETRIEVAL_IN_ORDER_DIRECTIVE   = 'in_order'
+    RETRIEVAL_SPACED_DIRECTIVE     = 'spaced'
 
-    DISPLAY_WORD_DIRECTIVE = 'word'
+    DISPLAY_WORD_DIRECTIVE     = 'word'
     DISPLAY_SENTENCE_DIRECTIVE = 'sentence'
     
     # List of all supported retrieval directives, i.e. how word is retrieved.
-    RETRIEVAL_DIRECTIVES = [RETRIEVAL_RANDOMIZE_DIRECTIVE, 
-                            RETRIEVAL_INCREMENT_DIRECTIVE,
-                            RETRIEVAL_IN_ORDER_DIRECTIVE]
+    RETRIEVAL_DIRECTIVES = [RETRIEVAL_RANDOMIZED_DIRECTIVE, 
+                            RETRIEVAL_IN_ORDER_DIRECTIVE,
+                            RETRIEVAL_SPACED_DIRECTIVE]
 
     # List of all supported display directives, i.e. how words are displayed.
     DISPLAY_DIRECTIVES = [DISPLAY_WORD_DIRECTIVE, DISPLAY_SENTENCE_DIRECTIVE]

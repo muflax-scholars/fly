@@ -12,8 +12,9 @@ lessons will be assigned a word chooser that fits their directives.
 import logging
 logger = logging.getLogger(__name__)
 
-from fly.models.wordchooser import randomize
+from fly.models.wordchooser import randomized
 from fly.models.wordchooser import inorder
+from fly.models.wordchooser import spaced
 from fly.lessons.helpers.directive import DirectiveInterpreter
 
 
@@ -22,10 +23,12 @@ class LessonWordChooserMapper(object):
     """Maps lesson to word chooser based on information in lesson object."""
 
     # Map retrieval directives to word choosers.
-    RETRIEVAL_MAP = {DirectiveInterpreter.RETRIEVAL_RANDOMIZE_DIRECTIVE:\
-                                    randomize.RetrieveRandomize,
+    RETRIEVAL_MAP = {DirectiveInterpreter.RETRIEVAL_RANDOMIZED_DIRECTIVE:\
+                     randomized.RetrieveRandomized,
                      DirectiveInterpreter.RETRIEVAL_IN_ORDER_DIRECTIVE:\
-                                    inorder.RetrieveInOrder}
+                     inorder.RetrieveInOrder,
+                     DirectiveInterpreter.RETRIEVAL_SPACED_DIRECTIVE:\
+                     spaced.RetrieveSpaced}
 
     def get_word_chooser(self, lesson):
 
@@ -57,5 +60,3 @@ class LessonWordChooserMapper(object):
         return self.RETRIEVAL_MAP[retrieval_directive]\
                                 (lesson.chord_translation_dict, 
                                  lesson.chords_list)
-        
-

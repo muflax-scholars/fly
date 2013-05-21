@@ -203,8 +203,7 @@ class Main(object):
         """Generate a new word for the user to type."""
 
         self.model.generate_word_to_type()
-        target_chord, target_translation = \
-                self.model.get_display_word_and_translation() 
+        target_chord, target_translation = self.model.get_display_word_and_translation()
         self.gui.set_word_to_type(target_chord, target_translation)
     
     def process_events(self):
