@@ -47,7 +47,7 @@ STENO_ALPHABET = {
     'X': 'KP',
     '-X': '-BGS',
     'Y': 'KWR',
-    'Z': 'STKPW',
+    'Z': 'SWR',
     '-Z': '-Z',
     '*': '*'}
 
