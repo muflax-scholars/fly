@@ -19,13 +19,6 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-CANON = "canon"
-ALTERNATIVE = "alternative"
-BRIEF = "brief"
-MISSTROKE = "misstroke"
-UNKNOWN = "unknown"
-
-
 class ChordHolder(object):
 
     """Store all steno chords for a word, and retrieve several ways."""
@@ -69,50 +62,8 @@ class ChordHolder(object):
         @rtype: str
         """
 
-        # chord_categories = {}
-        # for chord in self.chord_list:
-        #     if chord in categorization_dict:
-        #         chord_category = categorization_dict[chord]
-        #         chord_categories[chord_category] = chord
-        #     else:
-        #         logger.info("Uncategorized chord: %s."
-        #                     " Please run fly.data.generation.categoriser to "
-        #                     "categorize uncategorized words." % chord)
+        return self.get_easiest_chord()
 
-        # if not chord_categories:
-        #     logger.info("No categorization found for any chords, "
-        #                 "returning random.")
-        #     return self.get_random_chord()
-        
-        # if CANON in chord_categories:
-        #     return chord_categories[CANON]
-
-        # if ALTERNATIVE in chord_categories:
-        #     return chord_categories[ALTERNATIVE]
-
-        # if UNKNOWN in chord_categories:
-        #     logger.info("No 'canon' or 'alternative' found! Using chord with "
-        #                 "'unknown' category %s" % chord_categories[UNKNOWN])
-        #     return chord_categories[UNKNOWN]
-
-        # if BRIEF in chord_categories:
-        #     logger.info("No 'canon', 'alternative' or 'unknown' found! Using "
-        #                 "chord with 'brief' "
-        #                 "category %s" % chord_categories[BRIEF])
-        #     return chord_categories[BRIEF]
-
-        # if MISSTROKE in chord_categories:
-        #     logger.info("No 'canon', 'alternative', 'unknown' or 'brief' "
-        #                 "found! Run out of options. Using chord "
-        #                 "with 'misstroke' "
-        #                 "category %s" % chord_categories[MISSTROKE])
-        #     return chord_categories[MISSTROKE]
-
-        # logger.info("Unexpected categories found: %s. Returning random "
-        #             "chord." % chord_categories)
-        # return self.get_random_chord()
-        return ""
-                
     def get_easiest_chord(self):
 
         """Get the chord which is the easiest to type.
