@@ -3,7 +3,8 @@
 
 """Provides file path information about files in Fly."""
 
-import os
+import os, os.path
+from fly.plover import config as conf
 
 
 def get_base_directory():
@@ -11,14 +12,12 @@ def get_base_directory():
     return os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 
 
-def get_dictionaries_directory():
-    """Return the directory which contains dictionaries."""
-    return os.path.join(get_base_directory(), 'data', 'dicts')
-
-
 def get_plover_dict_path():
     """Return the file path of the plover dictionary."""
-    return os.path.join(get_dictionaries_directory(), 'dict.json')
+    config = conf.get_config()
+    dictionary_filename = config.get(conf.DICTIONARY_CONFIG_SECTION,
+                                     conf.DICTIONARY_FILE_OPTION)
+    return dictionary_filename
 
 
 def get_lessons_directory():
