@@ -36,7 +36,7 @@ class LessonFinder(object):
         lesson_list = []
         file_names = self.get_file_list()
 
-        for name in file_names:
+        for name in sorted(file_names):
             raw_name, extension = os.path.splitext(name)
 
             # Create lesson object to represent lesson
