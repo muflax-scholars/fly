@@ -171,19 +171,16 @@ class WordToChordTranslator(object):
         """
 
         words = line.split(" ")
-        for word in words:
+        for i, word in enumerate(words):
             if word.find("<") != -1 or word.find(">") != -1:
                 continue
             word = word.strip()
-            words_or_punctuation = re.split("([-.,?;!:\"])", word)
-            words_or_punctuation = [w for w in words_or_punctuation if w != '']
-            for i, word_or_punctuation in enumerate(words_or_punctuation):
-                if word_or_punctuation == "\"":
-                    yield cls.__parse_quotes(i)
-                elif cls.__is_punctuation(word_or_punctuation):
-                    yield "{%s}" % word_or_punctuation
-                else:
-                    yield word_or_punctuation
+            if word == "\"":
+                yield cls.__parse_quotes(i)
+            elif cls.__is_punctuation(word):
+                yield "{%s}" % word
+            else:
+                yield word
     
     @staticmethod
     def __parse_quotes(i):
