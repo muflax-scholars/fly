@@ -3,8 +3,18 @@
 # Copyright muflax <mail@muflax.com>, 2013
 # License: GNU GPL 3 <http://www.gnu.org/copyleft/gpl.html>
 
-# Generates lessons for the pseudosteno track.
+# Generates lessons for the pseudosteno track. Pseudo is introduced in 5 steps:
+#
+# 1. Single keys where the pseudo character is identical to the steno character.
+# 2. Pseudo characters that have the shape of a row, i.e. multiple consecutive fingers on the same level.
+# 3. Pseudo characters on a row, i.e. produced by pressing two keys with one finger.
+# 4. Pseudo characters on rows with gaps.
+# 5. Pseudo characters on blocks, i.e. rows on both levels.
+# 6. All remaining pseudo characters.
+#
+# This covers all of pseudo, but not all possible key combinations. Those are introduced manually via the Phoenix Theory track.
 
+# for reference
 StenoKeys = [
              # left hand
              ["",    "S-",  ""],    # L4
@@ -27,6 +37,7 @@ StenoKeys = [
              ["T+D", "S+Z", ""],    # R4
             ]
 
+# stroke -> pseudo
 PseudoSteno = { 
                "*S"    => "-[ST]",   # new
                "-B"    => "-B",
@@ -52,42 +63,43 @@ PseudoSteno = {
                "-T"    => "-T",
                "-V"    => "-V",
                "-Z"    => "-Z",
-               "A"     => "A",
+               "A-"    => "A",
                "AEU"   => "[AY]",
                "AO"    => "[OO]",    # only for one-stroke words spelt with "oo"; otherwise it's AOU
                "AOE"   => "[EE]",
                "AOEU"  => "[EYE]",
                "AOU"   => "[OOH]",
                "AU"    => "[AW]",
-               "E"     => "E",
+               "-E"    => "E",
                "EU"    => "I",
-               "H"     => "H",
-               "HR"    => "L",
-               "K"     => "K",
+               "H-"    => "H",
+               "HR-"   => "L",
+               "K-"    => "K",
                "KH"    => "[CH]-",   # new
-               "KP"    => "X",
+               "KP-"   => "X",
                "KPW"   => "[KN]-",   # new
-               "KR"    => "C",
+               "KR-"   => "C",
                "KW"    => "Q",
                "KWR"   => "Y",
-               "O"     => "O",
+               "O-"    => "O",
                "OE"    => "[OH]",
                "OU"    => "[OW]",
-               "P"     => "P",
+               "P-"    => "P",
                "PH"    => "M",
                "PW"    => "B",
-               "R"     => "R",
-               "S"     => "S",
+               "R-"    => "R",
+               "S-"    => "S",
                "SKWR"  => "J",
                "SR"    => "V",
                "SWR"   => "Z-",      # new
-               "T"     => "T",
+               "T-"    => "T",
                "TK"    => "D",
                "TKPW"  => "G",
-               "TP"    => "F",
+               "TP-"   => "F",
                "TPH"   => "N",
-               "U"     => "U",
-               "W"     => "W",
+               "-U"    => "U",
+               "W-"    => "W",
+               "*"     => "*",       # not technically pseudo, but only exception we need
               }
 
 def make_lesson name, type=:spaced, words={}
@@ -106,116 +118,94 @@ def make_lesson name, type=:spaced, words={}
   end
 end
 
-# order in which steno keys are introduced
-steno = [
-         "S-",
-         "T-",
-         "K-",
-         "TK",
-         "P-",
-         "W-",
-         "PW",
-         "H-",
-         "R-",
-         "HR-",
-         "*",
-         "AO",
-         "A-",
-         "O-",
-         "-E",
-         "-U",
-         "EU",
-         "-F",
-         "-R",
-         "FR",
-         "-P",
-         "-B",
-         "-PB",
-         "-L",
-         "-G",
-         "LG",
-         "-T",
-         "-S",
-         "-TS",
-         "-D",
-         "-Z",
-         "DZ",
-         "TD",
-         "SZ",
-        ]
+ordering = {
+            :single => [
+                        "S-", #
+                        "A-",
+                        "-R", #
+                        "K-",
+                        "-L",
+                        "T-", #
+                        "-E",
+                        "P-", #
+                        "-G",
+                        "O-",
+                        "W-",
+                        "-T", #
+                        "-U",
+                        "*",
+                        "-S", #
+                        "H-", 
+                        "-F",
+                        "R-", #
+                        "-D",
+                        "-P", #
+                        "-B",
+                        "-Z",
+                       ],
 
-# order in which pseudosteno is introduced
-pseudo = [
-          "*S",
-          "-B",
-          "-BG",
-          "-BGS",
-          "-D",
-          "-F",
-          "-FB",
-          "-FP",
-          "-FPL",
-          "-G",
-          "-GS",
-          "-GT",
-          "-GZ",
-          "-L",
-          "-P",
-          "-PB",
-          "-PBLG",
-          "-PL",
-          "-R",
-          "-S",
-          "-SZ",
-          "-T",
-          "-V",
-          "-Z",
-          "A",
-          "AEU",
-          "AO",
-          "AOE",
-          "AOEU",
-          "AOU",
-          "AU",
-          "E",
-          "EU",
-          "H",
-          "HR",
-          "K",
-          "KH",
-          "KP",
-          "KPW",
-          "KR",
-          "KW",
-          "KWR",
-          "O",
-          "OE",
-          "OU",
-          "P",
-          "PH",
-          "PW",
-          "R",
-          "S",
-          "SKWR",
-          "SR",
-          "SWR",
-          "T",
-          "TK",
-          "TKPW",
-          "TP",
-          "TPH",
-          "U",
-          "W",
-         ]
+            :rows => [
+                      "-BG",
+                      "-BGS",
+                      "-FP",
+                      "-FPL",
+                      "-GS",
+                      "-PL",
+                      "-SZ",
+                      "AEU",
+                      "AO",
+                      "AOE",
+                      "AOEU",
+                      "EU",
+                      "KW",
+                      "KWR",
+                      "OE",
+                      "PH",
+                      "SKWR",
+                      "TP-",
+                      "TPH",
+                     ],
 
-make_lesson "1_single_key",          :spaced,     Hash[steno.zip(steno)]
-make_lesson "1_single_key_review",   :randomized, Hash[steno.zip(steno)]
-make_lesson "2_multi_key",           :spaced,     {}
-make_lesson "2_multi_key_review",    :randomized, {}
-make_lesson "3_pseudo",              :spaced,     Hash[pseudo.map{|p| [PseudoSteno[p], p]}]
-make_lesson "3_pseudo_review",       :randomized, Hash[pseudo.map{|p| [PseudoSteno[p], p]}]
-make_lesson "4_multi_pseudo",        :spaced,     {}
-make_lesson "4_multi_pseudo_review", :randomized, {}
+            :cols => [
+                      "-PB",
+                      "HR-",
+                      "PW",
+                      "TK",
+                     ],
 
+            :gaps => [
+                      "-GZ",
+                      "AOU",
+                      "AU",
+                      "KR-",
+                      "OU",
+                      "SR",
+                      "SWR",
+                     ],
 
-# make_lesson "test", :spaced, PseudoSteno.invert
+            :blocks => [
+                        "-PBLG",
+                        "TKPW",
+                       ],
+
+            :rest => [
+                      "*S",
+                      "-FB",
+                      "-GT",
+                      "KH",
+                      "KP-",
+                      "KPW",
+                     ]
+           }
+
+review = []
+ordering.each.with_index(1) do |(name, chars), i|
+  make_lesson "#{i}_#{name}", :spaced, Hash[chars.map{|c| [PseudoSteno[c], c]}]
+  review += chars
+  make_lesson "#{i}_#{name}_review", :randomized, Hash[review.map{|c| [PseudoSteno[c], c]}]
+end
+
+# make sure the specs are valid
+review.each do |char|
+  puts "#{char} missing in PseudoSteno..." unless PseudoSteno.include? char
+end
