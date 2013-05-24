@@ -39,15 +39,17 @@ StenoKeys = [
 
 # stroke -> pseudo
 PseudoSteno = { 
+               "*"     => "*",       # not technically pseudo, but only exception we need
                "*S"    => "-[ST]",   # new
                "-B"    => "-B",
                "-BG"   => "-K",
                "-BGS"  => "-X",
                "-D"    => "-D",      # also -ed
+               "-E"    => "E",
                "-F"    => "-F",
                "-FB"   => "-V",      # new
                "-FP"   => "-[CH]",   # new
-               "-FPL"  => "-[MP",    # new
+               "-FPL"  => "-[MP]",    # new
                "-G"    => "-G",      # also -ing
                "-GS"   => "-[SH]",   # new
                "-GT"   => "-[TH]",   # new
@@ -61,6 +63,7 @@ PseudoSteno = {
                "-S"    => "-S",
                "-SZ"   => "-[SS]",   # new
                "-T"    => "-T",
+               "-U"    => "U",
                "-V"    => "-V",
                "-Z"    => "-Z",
                "A-"    => "A",
@@ -70,7 +73,6 @@ PseudoSteno = {
                "AOEU"  => "[EYE]",
                "AOU"   => "[OOH]",
                "AU"    => "[AW]",
-               "-E"    => "E",
                "EU"    => "I",
                "H-"    => "H",
                "HR-"   => "L",
@@ -97,9 +99,7 @@ PseudoSteno = {
                "TKPW"  => "G",
                "TP-"   => "F",
                "TPH"   => "N",
-               "-U"    => "U",
                "W-"    => "W",
-               "*"     => "*",       # not technically pseudo, but only exception we need
               }
 
 def make_lesson name, type=:spaced, words={}
@@ -118,83 +118,84 @@ def make_lesson name, type=:spaced, words={}
   end
 end
 
+# ! marks min-diff pairs
 ordering = {
             :single => [
-                        "S-", #
+                        "S-", # !
                         "A-",
-                        "-R", #
+                        "-R", # !
                         "K-",
                         "-L",
-                        "T-", #
+                        "T-", # !
                         "-E",
-                        "P-", #
+                        "P-", # !
                         "-G",
                         "O-",
                         "W-",
-                        "-T", #
+                        "-T", # !
                         "-U",
                         "*",
-                        "-S", #
+                        "-S", # !
                         "H-", 
                         "-F",
-                        "R-", #
+                        "R-", # !
                         "-D",
-                        "-P", #
-                        "-B",
+                        "-P", # !
                         "-Z",
+                        "-B",
                        ],
 
             :rows => [
-                      "-BG",
-                      "-BGS",
-                      "-FP",
-                      "-FPL",
-                      "-GS",
-                      "-PL",
-                      "-SZ",
-                      "AEU",
-                      "AO",
-                      "AOE",
-                      "AOEU",
-                      "EU",
-                      "KW",
-                      "KWR",
-                      "OE",
-                      "PH",
-                      "SKWR",
-                      "TP-",
-                      "TPH",
+                      "-BG",  # ! -K
+                      "EU",   # I
+                      "PH",   # ! M
+                      "TP-",  # F
+                      "KWR",  # Y
+                      "AO",   # ! OO
+                      "KW",   # Q
+                      "-FP",  # -CH
+                      "-PL",  # ! -M
+                      "SKWR", # J
+                      "-GS",  # -SH
+                      "AOE",  # ! EE
+                      "-SZ",  # -SS
+                      "OE",   # ! OH
+                      "-BGS", # ! -X
+                      "AEU",  # AY
+                      "-FPL", # -MP
+                      "TPH",  # N 
+                      "AOEU", # ! EYE
                      ],
 
             :cols => [
-                      "-PB",
-                      "HR-",
-                      "PW",
-                      "TK",
+                      "-PB", # -N
+                      "HR-", # L-
+                      "PW",  # B-
+                      "TK",  # D-
                      ],
 
             :gaps => [
-                      "-GZ",
-                      "AOU",
-                      "AU",
-                      "KR-",
-                      "OU",
-                      "SR",
-                      "SWR",
+                      "AOU", # ! OOH
+                      "-GZ", # -SHUN
+                      "SR",  # V-
+                      "AU",  # ! AW
+                      "KR-", # C-
+                      "SWR", # Z-
+                      "OU",  # ! OW
                      ],
 
             :blocks => [
-                        "-PBLG",
-                        "TKPW",
+                        "-PBLG", # -J
+                        "TKPW",  # G-
                        ],
 
             :rest => [
-                      "*S",
-                      "-FB",
-                      "-GT",
-                      "KH",
-                      "KP-",
-                      "KPW",
+                      "*S",  # -ST
+                      "KH",  # CH-
+                      "KP-", # X-
+                      "-FB", # V
+                      "-GT", # -TH
+                      "KPW", # KN-
                      ]
            }
 
