@@ -45,11 +45,11 @@ PseudoSteno = {
                "-BG"   => "-K",
                "-BGS"  => "-X",
                "-D"    => "-D",      # also -ed
-               "-E"    => "E",
+               "E"     => "E",
                "-F"    => "-F",
                "-FB"   => "-V",      # new
                "-FP"   => "-[CH]",   # new
-               "-FPL"  => "-[MP]",    # new
+               "-FPL"  => "-[MP]",   # new
                "-G"    => "-G",      # also -ing
                "-GS"   => "-[SH]",   # new
                "-GT"   => "-[TH]",   # new
@@ -63,10 +63,10 @@ PseudoSteno = {
                "-S"    => "-S",
                "-SZ"   => "-[SS]",   # new
                "-T"    => "-T",
-               "-U"    => "U",
+               "U"     => "U",
                "-V"    => "-V",
                "-Z"    => "-Z",
-               "A-"    => "A",
+               "A"     => "A",
                "AEU"   => "[AY]",
                "AO"    => "[OO]",    # only for one-stroke words spelt with "oo"; otherwise it's AOU
                "AOE"   => "[EE]",
@@ -74,32 +74,32 @@ PseudoSteno = {
                "AOU"   => "[OOH]",
                "AU"    => "[AW]",
                "EU"    => "I",
-               "H-"    => "H",
-               "HR-"   => "L",
-               "K-"    => "K",
+               "H"     => "H",
+               "HR"    => "L",
+               "K"     => "K",
                "KH"    => "[CH]-",   # new
-               "KP-"   => "X",
+               "KP"    => "X",
                "KPW"   => "[KN]-",   # new
-               "KR-"   => "C",
+               "KR"    => "C",
                "KW"    => "Q",
                "KWR"   => "Y",
-               "O-"    => "O",
+               "O"     => "O",
                "OE"    => "[OH]",
                "OU"    => "[OW]",
-               "P-"    => "P",
+               "P"     => "P",
                "PH"    => "M",
                "PW"    => "B",
-               "R-"    => "R",
-               "S-"    => "S",
+               "R"     => "R",
+               "S"     => "S",
                "SKWR"  => "J",
                "SR"    => "V",
                "SWR"   => "Z-",      # new
-               "T-"    => "T",
+               "T"     => "T",
                "TK"    => "D",
                "TKPW"  => "G",
-               "TP-"   => "F",
+               "TP"    => "F",
                "TPH"   => "N",
-               "W-"    => "W",
+               "W"     => "W",
               }
 
 def make_lesson name, type=:spaced, words={}
@@ -121,24 +121,24 @@ end
 # ! marks min-diff pairs
 ordering = {
             :single => [
-                        "S-", # !
-                        "A-",
+                        "S",  # !
+                        "A",
                         "-R", # !
-                        "K-",
+                        "K",
                         "-L",
-                        "T-", # !
-                        "-E",
-                        "P-", # !
+                        "T",  # !
+                        "E",
+                        "P",  # !
                         "-G",
-                        "O-",
-                        "W-",
+                        "O",
+                        "W",
                         "-T", # !
-                        "-U",
+                        "U",
                         "*",
                         "-S", # !
-                        "H-", 
+                        "H", 
                         "-F",
-                        "R-", # !
+                        "R",  # !
                         "-D",
                         "-P", # !
                         "-Z",
@@ -149,7 +149,7 @@ ordering = {
                       "-BG",  # ! -K
                       "EU",   # I
                       "PH",   # ! M
-                      "TP-",  # F
+                      "TP",   # F
                       "KWR",  # Y
                       "AO",   # ! OO
                       "KW",   # Q
@@ -169,7 +169,7 @@ ordering = {
 
             :cols => [
                       "-PB", # -N
-                      "HR-", # L-
+                      "HR",  # L-
                       "PW",  # B-
                       "TK",  # D-
                      ],
@@ -179,7 +179,7 @@ ordering = {
                       "-GZ", # -SHUN
                       "SR",  # V-
                       "AU",  # ! AW
-                      "KR-", # C-
+                      "KR",  # C-
                       "SWR", # Z-
                       "OU",  # ! OW
                      ],
@@ -192,7 +192,7 @@ ordering = {
             :rest => [
                       "*S",  # -ST
                       "KH",  # CH-
-                      "KP-", # X-
+                      "KP",  # X-
                       "-FB", # V
                       "-GT", # -TH
                       "KPW", # KN-
