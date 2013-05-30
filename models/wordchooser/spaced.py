@@ -50,6 +50,12 @@ class RetrieveSpaced(interface.WordChooserInterface):
         # remove word from learning queue
         if self.queue:
             word = self.queue.pop(0)
+            
+            # try not to repeat words
+            if word == self.last_word and self.queue:
+                word = self.queue.pop(0)
+                self.queue.insert(0, self.last_word)
+            
             # remember that we still have an unanswered word
             self.last_word = word
             self.open_word = True
