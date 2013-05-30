@@ -39,7 +39,7 @@ StenoKeys = [
 
 # stroke -> pseudo
 PseudoSteno = { 
-               "*"     => "*",       # not technically pseudo, but only exception we need
+               # "*"     => "*",       # not technically pseudo, but only exception we need
                "*S"    => "-[ST]",   # new
                "-B"    => "-B",
                "-BG"   => "-K",
@@ -134,7 +134,7 @@ ordering = {
                         "W",
                         "-T", # !
                         "U",
-                        "*",
+                        # "*",
                         "-S", # !
                         "H", 
                         "-F",
