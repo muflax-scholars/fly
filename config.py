@@ -22,7 +22,7 @@ DISPLAY_INFO_PANEL = True
 
 # Display key highlighting
 # This can be toggled in the GUI with "Toggle Key Highlighting"
-DISPLAY_KEY_HIGHLIGHTING = True
+DISPLAY_KEY_HIGHLIGHTING = False
 
 # Highlight what key was pressed
 DISPLAY_PRESSED_KEY_HIGHLIGHTING = False
