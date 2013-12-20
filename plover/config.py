@@ -22,15 +22,15 @@ MACHINE_CONFIG_SECTION = 'Machine Configuration'
 MACHINE_TYPE_OPTION = 'machine_type'
 MACHINE_AUTO_START_OPTION = 'auto_start'
 DICTIONARY_CONFIG_SECTION = 'Dictionary Configuration'
-DICTIONARY_FILE_OPTION = 'dictionary_file'
-DICTIONARY_FORMAT_OPTION = 'dictionary_format'
+DICTIONARY_FILE_OPTION = 'dictionary_file1'
+DICTIONARY_FORMAT_OPTION = 'dictionary_format1'
 LOGGING_CONFIG_SECTION = 'Logging Configuration'
 LOG_FILE_OPTION = 'log_file'
 ENABLE_STROKE_LOGGING_OPTION = 'enable_stroke_logging'
 ENABLE_TRANSLATION_LOGGING_OPTION = 'enable_translation_logging'
 
 # Default values for configuration options.
-DEFAULT_MACHINE_TYPE = 'Microsoft Sidewinder X4'
+DEFAULT_MACHINE_TYPE = 'NKRO Keyboard'
 DEFAULT_MACHINE_AUTO_START = 'false'
 DEFAULT_DICTIONARY_FILE = 'dict.json'
 DEFAULT_DICTIONARY_FORMAT = 'Eclipse'
@@ -82,7 +82,7 @@ def import_named_module(name, module_dictionary):
 
     Returns the references module, or None if the name is not a key in
     the module_dictionary.
-    
+
     """
     mod_name =  module_dictionary.get(name, None)
     if mod_name is not None:
@@ -99,7 +99,7 @@ def get_config():
 
     If the given configuration file does not exist, a default
     configuration file is created.
-    
+
     """
     config_dir = CONFIG_DIR
     config_file = CONFIG_FILE
@@ -118,7 +118,7 @@ def get_config():
     if not os.path.exists(config_file):
         with open(config_file, 'w') as f:
             f.close()
-        
+
     # Read in the configuration file.
     config = ConfigParser.RawConfigParser()
     config.read(config_file)
@@ -158,7 +158,7 @@ def verify_config(config):
             config.add_section(section)
         if not config.has_option(section, option):
             config.set(section, option, default)
-    
+
     # Write the file to disk.
     with open(config_file, 'w') as f:
         config.write(f)
