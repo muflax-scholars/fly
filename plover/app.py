@@ -98,13 +98,9 @@ class StenoEngine:
             self.machine_init.update(serial_params.__dict__)
 
         # Set the steno dictionary format module.
-        dictionary_format = self.config.get(conf.DICTIONARY_CONFIG_SECTION,
-                                            conf.DICTIONARY_FORMAT_OPTION)
+        dictionary_format = "Eclipse"
         self.dictionary_module = conf.import_named_module(dictionary_format,
                                                           dictionary.supported)
-        if self.dictionary_module is None:
-            raise ValueError('Invalid configuration value for %s: %s' %
-                             (conf.DICTIONARY_FORMAT_OPTION, dictionary_format))
 
         # Load the dictionary. The dictionary path can be either
         # absolute or relative to the configuration directory.
