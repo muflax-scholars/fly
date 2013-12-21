@@ -16,91 +16,91 @@
 
 # for reference
 StenoKeys = [
-             # left hand
-             ["",    "S-",  ""],    # L4
-             ["T-",  "K-",  "T+K"], # L3
-             ["P-",  "W-",  "P+W"], # L2
-             ["H-",  "R-",  "H+R"], # L1
-             ["*",   "*",   ""],    # L1
+  # left hand
+  ["",    "S-",  ""],    # L4
+  ["T-",  "K-",  "T+K"], # L3
+  ["P-",  "W-",  "P+W"], # L2
+  ["H-",  "R-",  "H+R"], # L1
+  ["*",   "*",   ""],    # L1
 
-             # thumbs
-             ["A+O", "A-",  "O-"],  # LT
-             ["-E",  "-U",  "E+U"], # RT
+  # thumbs
+  ["A+O", "A-",  "O-"],  # LT
+  ["-E",  "-U",  "E+U"], # RT
 
-             # right hand
-             ["*",   "*",   ""],    # R1
-             ["-F",  "-R",  "F+R"], # R1
-             ["-P",  "-B",  "P+B"], # R2
-             ["-L",  "-G",  "L+G"], # R3
-             ["-T",  "-S",  "T+S"], # R4
-             ["-D",  "-Z",  "D+Z"], # R4
-             ["T+D", "S+Z", ""],    # R4
-            ]
+  # right hand
+  ["*",   "*",   ""],    # R1
+  ["-F",  "-R",  "F+R"], # R1
+  ["-P",  "-B",  "P+B"], # R2
+  ["-L",  "-G",  "L+G"], # R3
+  ["-T",  "-S",  "T+S"], # R4
+  ["-D",  "-Z",  "D+Z"], # R4
+  ["T+D", "S+Z", ""],    # R4
+]
 
 # stroke -> pseudo
-PseudoSteno = { 
-               # "*"     => "*",       # not technically pseudo, but only exception we need
-               "*S"    => "-[ST]",   # new
-               "-B"    => "-B",
-               "-BG"   => "-K",
-               "-BGS"  => "-X",
-               "-D"    => "-D",      # also -ed
-               "E"     => "E",
-               "-F"    => "-F",
-               "-FB"   => "-V",      # new
-               "-FP"   => "-[CH]",   # new
-               "-FPL"  => "-[MP]",   # new
-               "-G"    => "-G",      # also -ing
-               "-GS"   => "-[SH]",   # new
-               "-GT"   => "-[TH]",   # new
-               "-GZ"   => "-[SHUN]", # or -ings
-               "-L"    => "-L",
-               "-P"    => "-P",
-               "-PB"   => "-N",
-               "-PBLG" => "-J",
-               "-PL"   => "-M",
-               "-R"    => "-R",
-               "-S"    => "-S",
-               "-SZ"   => "-[SS]",   # new
-               "-T"    => "-T",
-               "U"     => "U",
-               "-V"    => "-V",
-               "-Z"    => "-Z",
-               "A"     => "A",
-               "AEU"   => "[AY]",
-               "AO"    => "[OO]",    # only for one-stroke words spelt with "oo"; otherwise it's AOU
-               "AOE"   => "[EE]",
-               "AOEU"  => "[EYE]",
-               "AOU"   => "[OOH]",
-               "AU"    => "[AW]",
-               "EU"    => "I",
-               "H"     => "H",
-               "HR"    => "L",
-               "K"     => "K",
-               "KH"    => "[CH]-",   # new
-               "KP"    => "X",
-               "KPW"   => "[KN]-",   # new
-               "KR"    => "C",
-               "KW"    => "Q",
-               "KWR"   => "Y",
-               "O"     => "O",
-               "OE"    => "[OH]",
-               "OU"    => "[OW]",
-               "P"     => "P",
-               "PH"    => "M",
-               "PW"    => "B",
-               "R"     => "R",
-               "S"     => "S",
-               "SKWR"  => "J",
-               "SR"    => "V",
-               "SWR"   => "Z-",      # new
-               "T"     => "T",
-               "TK"    => "D",
-               "TKPW"  => "G",
-               "TP"    => "F",
-               "TPH"   => "N",
-               "W"     => "W",
-              }
+PseudoSteno = {
+  # "*"     => "*",       # not technically pseudo, but only exception we need
+  "*S"    => "-[ST]",   # new
+  "-B"    => "-B",
+  "-BG"   => "-K",
+  "-BGS"  => "-X",
+  "-D"    => "-D",      # also -ed
+  "E"     => "E",
+  "-F"    => "-F",
+  "-FB"   => "-V",      # new
+  "-FP"   => "-[CH]",   # new
+  "-FPL"  => "-[MP]",   # new
+  "-G"    => "-G",      # also -ing
+  "-GS"   => "-[SH]",   # new
+  "-GT"   => "-[TH]",   # new
+  "-GZ"   => "-[SHUN]", # or -ings
+  "-L"    => "-L",
+  "-P"    => "-P",
+  "-PB"   => "-N",
+  "-PBLG" => "-J",
+  "-PL"   => "-M",
+  "-R"    => "-R",
+  "-S"    => "-S",
+  "-SZ"   => "-[SS]",   # new
+  "-T"    => "-T",
+  "U"     => "U",
+  "-V"    => "-V",
+  "-Z"    => "-Z",
+  "A"     => "A",
+  "AEU"   => "[AY]",
+  "AO"    => "[OO]",    # only for one-stroke words spelt with "oo"; otherwise it's AOU
+  "AOE"   => "[EE]",
+  "AOEU"  => "[EYE]",
+  "AOU"   => "[OOH]",
+  "AU"    => "[AW]",
+  "EU"    => "I",
+  "H"     => "H",
+  "HR"    => "L",
+  "K"     => "K",
+  "KH"    => "[CH]-",   # new
+  "KP"    => "X",
+  "KPW"   => "[KN]-",   # new
+  "KR"    => "C",
+  "KW"    => "Q",
+  "KWR"   => "Y",
+  "O"     => "O",
+  "OE"    => "[OH]",
+  "OU"    => "[OW]",
+  "P"     => "P",
+  "PH"    => "M",
+  "PW"    => "B",
+  "R"     => "R",
+  "S"     => "S",
+  "SKWR"  => "J",
+  "SR"    => "V",
+  "SWR"   => "Z-",      # new
+  "T"     => "T",
+  "TK"    => "D",
+  "TKPW"  => "G",
+  "TP"    => "F",
+  "TPH"   => "N",
+  "W"     => "W",
+}
 
 def make_lesson name, type=:spaced, words={}
   File.open("#{name}.les", "w") do |les|
@@ -120,84 +120,84 @@ end
 
 # ! marks min-diff pairs
 ordering = {
-            :single => [
-                        "S",  # !
-                        "A",
-                        "-R", # !
-                        "K",
-                        "-L",
-                        "T",  # !
-                        "E",
-                        "P",  # !
-                        "-G",
-                        "O",
-                        "W",
-                        "-T", # !
-                        "U",
-                        # "*",
-                        "-S", # !
-                        "H", 
-                        "-F",
-                        "R",  # !
-                        "-D",
-                        "-P", # !
-                        "-Z",
-                        "-B",
-                       ],
+  :single => [
+    "S",  # !
+    "A",
+    "-R", # !
+    "K",
+    "-L",
+    "T",  # !
+    "E",
+    "P",  # !
+    "-G",
+    "O",
+    "W",
+    "-T", # !
+    "U",
+    # "*",
+    "-S", # !
+    "H",
+    "-F",
+    "R",  # !
+    "-D",
+    "-P", # !
+    "-Z",
+    "-B",
+  ],
 
-            :rows => [
-                      "-BG",  # ! -K
-                      "EU",   # I
-                      "PH",   # ! M
-                      "TP",   # F
-                      "KWR",  # Y
-                      "AO",   # ! OO
-                      "KW",   # Q
-                      "-FP",  # -CH
-                      "-PL",  # ! -M
-                      "SKWR", # J
-                      "-GS",  # -SH
-                      "AOE",  # ! EE
-                      "-SZ",  # -SS
-                      "OE",   # ! OH
-                      "-BGS", # ! -X
-                      "AEU",  # AY
-                      "-FPL", # -MP
-                      "TPH",  # N 
-                      "AOEU", # ! EYE
-                     ],
+  :rows => [
+    "-BG",  # ! -K
+    "EU",   # I
+    "PH",   # ! M
+    "TP",   # F
+    "KWR",  # Y
+    "AO",   # ! OO
+    "KW",   # Q
+    "-FP",  # -CH
+    "-PL",  # ! -M
+    "SKWR", # J
+    "-GS",  # -SH
+    "AOE",  # ! EE
+    "-SZ",  # -SS
+    "OE",   # ! OH
+    "-BGS", # ! -X
+    "AEU",  # AY
+    "-FPL", # -MP
+    "TPH",  # N
+    "AOEU", # ! EYE
+  ],
 
-            :cols => [
-                      "-PB", # -N
-                      "HR",  # L-
-                      "PW",  # B-
-                      "TK",  # D-
-                     ],
+  :cols => [
+    "-PB", # -N
+    "HR",  # L-
+    "PW",  # B-
+    "TK",  # D-
+  ],
 
-            :gaps => [
-                      "AOU", # ! OOH
-                      "-GZ", # -SHUN
-                      "SR",  # V-
-                      "AU",  # ! AW
-                      "KR",  # C-
-                      "SWR", # Z-
-                      "OU",  # ! OW
-                     ],
+  :gaps => [
+    "AOU", # ! OOH
+    "-GZ", # -SHUN
+    "SR",  # V-
+    "AU",  # ! AW
+    "KR",  # C-
+    "SWR", # Z-
+    "OU",  # ! OW
+  ],
 
-            :blocks => [
-                        "-PBLG", # -J
-                        "TKPW",  # G-
-                       ],
+  :blocks => [
+    "-PBLG", # -J
+    "TKPW",  # G-
+  ],
 
-            :rest => [
-                      "*S",  # -ST
-                      "KH",  # CH-
-                      "KP",  # X-
-                      "-FB", # V
-                      "-GT", # -TH
-                      "KPW", # KN-
-                     ]
-           }
+  :rest => [
+    "*S",  # -ST
+    "KH",  # CH-
+    "KP",  # X-
+    "-FB", # V
+    "-GT", # -TH
+    "KPW", # KN-
+  ]
+}
 
 review = []
 ordering.each.with_index(1) do |(name, chars), i|
